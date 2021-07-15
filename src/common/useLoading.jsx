@@ -6,18 +6,19 @@ export default function useLoading(initialValue=true,comp, loadingProps) {
   if(typeof comp !== 'function' && typeof action !== 'function'){
     return 
   }
-
-  function render() {
+  // 渲染函数render
+  function RenderElement() {
     if (loading) {
       return <Loading {...loadingProps}></Loading>;
     } else {
       return comp();
     }
   }
+  
 
   return {
     setLoading,
-    render,
+    RenderElement,
     loading
   };
 }

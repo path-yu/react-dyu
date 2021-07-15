@@ -1,7 +1,6 @@
 
 import React from 'react';
 import './loading.scss';
-const SpinIcon= Array(12).fill(<i />);
 const CircularIcon = (color) => {
   return (
     <div className="loading loading--circular">
@@ -26,7 +25,7 @@ export default function Loading(props){
 
   return (
     <div className="loadingContainer">
-      {CircularIcon(color)}
+      <CircularIcon color={color} />
       <p style={{ color: textColor }}>{message}</p>
     </div>
   );

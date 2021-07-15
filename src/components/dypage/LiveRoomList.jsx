@@ -1,73 +1,61 @@
-import React, { Component } from 'react'
-import { withRouter } from "react-router-dom"
- class LiveRoomList extends Component {
-    state = {
-        LiveRoomList: [],
-        msg:'正在加载数据...',
-    }
+import useLoading from "@/common/useLoading";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import http from "../../http";
 
-    async getLiveListData() {
-        try {
-            // console.log(props.tagId)
-            const tagId = this.props.tagId || 0
-            const cateId = this.props.cateId || 0
-            const api = this.props.api
-            const response = await fetch('http://h5sm.com/flutter/api/' + api + '?tag_id=' + tagId + '&cate_id=' + cateId)
-            const { data } = await response.json()
-            this.setState({
-                LiveRoomList: data,
-            })
-            if(data.length === 0) {
-                this.setState({
-                    msg:'暂时没有数据...'
-                })
-            }
-        } catch (e) {
-            this.setState({
-                msg:'数据加载失败'
-            })
-        }
+
+function LiveRoomList(props) {
+  const type = props.type;
+  const [LiveRoomList, setLiveRoomList] = useState([]);
+  const [page, setPage] = useState(1);
+  let { RenderElement, setLoading, loading } = useLoading(
+    true,
+    RenderRoomList,
+    {}
+  );
+  const { push } = useHistory();
+
+  useEffect(() => {
+      console.log('live');
+    if (!LiveRoomList.length) {
+      getLiveListData();
     }
-    componentDidMount() {
-        this.getLiveListData()
-    }
-    toLiveRoom = () =>{
-        let {history} = this.props;
-        history.push('/liveroom')
-    }
-    render() {
-        let { LiveRoomList } = this.state
-        if(LiveRoomList.length === 0 ){
-            return (
-                <p className="message">
-                   {this.state.msg}
-                </p>
-            )
-        }
-        return (
-            <div className="LiveRoomList">
-                {
-                    LiveRoomList.map((item, index) => {
-                        return (
-                            <div key={index} onClick={this.toLiveRoom}>
-                                <img src={item.room_src} alt="" />
-                                    <span className="onlineCount"> 
-                                        {
-                                            item.online >= 10000 ?  (item.online / 10000).toFixed(1) + '万' :
-                                            item.online
-                                        }
-                                    </span>
-                                <div>
-                                    <p> {item.room_name} </p>
-                                    <p className="tag"> {item.game_name} </p>
-                                </div>
-                            </div>
-                        )
-                    })
-                }
+  },[]);
+  function getLiveListData() {
+    http("/liveRoomList", {
+      params: {
+        type,
+        page,
+      },
+    }).then((res) => {
+      setLoading(false);
+      setLiveRoomList(res.data.list);
+    });
+  }
+  const toLiveRoom = () => push("/liveroom");
+
+  function RenderRoomList (){
+    return (
+      <div className="LiveRoomList">
+        {LiveRoomList.map((item, index) => {
+          return (
+            <div key={index} onClick={toLiveRoom}>
+              <img src={item.roomSrc} alt="" />
+              <span className="onlineCount">{item.hn}</span>
+              <p className="nickName">
+                <i className="NormalRoomItem-showAnchorIcon"></i>
+                <span>{item.nickname}</span>
+              </p>
+              <div>
+                <p> {item.roomName} </p>
+              </div>
             </div>
-        )
-    }
-}
-export default withRouter(LiveRoomList)
+          );
+        })}
+      </div>
+    );
+  };
 
+  return <RenderElement></RenderElement>;
+}
+export default LiveRoomList

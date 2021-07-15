@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App'
 import './common/reset.css'
 import './components/dypage/common.scss'
-import './index.css'
+import './public/index.css'
 import './utils/rem'
 
 ReactDOM.render(

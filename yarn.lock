@@ -246,6 +246,13 @@
   resolved "https://registry.nlark.com/@better-scroll/shared-utils/download/@better-scroll/shared-utils-2.4.1.tgz#b5e4e751a023180f1123d2c3773c75a863f71f77"
   integrity sha1-teTnUaAjGA8RI9LDdzx1qGP3H3c=
 
+"@better-scroll/slide@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.nlark.com/@better-scroll/slide/download/@better-scroll/slide-2.4.1.tgz?cache=0&sync_timestamp=1624517054723&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40better-scroll%2Fslide%2Fdownload%2F%40better-scroll%2Fslide-2.4.1.tgz#9086a5c9f20e76c275d940587c422547abb5b3e9"
+  integrity sha1-kIalyfIOdsJ12UBYfEIlR6u1s+k=
+  dependencies:
+    "@better-scroll/core" "^2.4.1"
+
 "@rollup/pluginutils@^4.1.0":
   version "4.1.0"
   resolved "https://registry.npm.taobao.org/@rollup/pluginutils/download/@rollup/pluginutils-4.1.0.tgz?cache=0&sync_timestamp=1603765613301&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40rollup%2Fpluginutils%2Fdownload%2F%40rollup%2Fpluginutils-4.1.0.tgz#0dcc61c780e39257554feb7f77207dceca13c838"
@@ -612,6 +619,11 @@ iconv-lite@^0.6.2:
   dependencies:
     safer-buffer ">= 2.1.2 < 3.0.0"
 
+indexof@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npm.taobao.org/indexof/download/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
+  integrity sha1-gtwzbSMrkGIXnQWrMpOmYFn9Q10=
+
 is-binary-path@~2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/is-binary-path/download/is-binary-path-2.1.0.tgz#ea1f7f3b80f064236e83470f86c09c254fb45b09"
@@ -784,7 +796,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.2:
+prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.npm.taobao.org/prop-types/download/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=

@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
-import DyBanner from './DyBanner'
-import DyCategory from './DyCategory'
-import LiveRoomList from './LiveRoomList'
+import React from 'react';
+import DyBanner from './DyBanner/DyBanner';
+import DyCategory from './DyCategory';
+import LiveRoomList from './LiveRoomList';
 
 
-export default class DyHome extends Component {
-     
-    render() {
-        return (
+export default function DyHome(){
+    return (
             <div>
                 {/* 轮播图 */}
                 <DyBanner></DyBanner>
@@ -16,6 +14,5 @@ export default class DyHome extends Component {
                 {/* 推荐直播列表 */}
                 <LiveRoomList api='subLiveList'></LiveRoomList>
             </div>
-        )
-    }
+        ) 
 }

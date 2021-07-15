@@ -3,7 +3,7 @@ import React from 'react';
 export default function HeaderTop(props) {
     return (
         <div className="HeaderTop">
-            <div className="logo">   </div>
+            <div className="logo">  </div>
             <div className="search">
                <i className="iconfont icon-sousuo "></i>
                <span>搜索</span>

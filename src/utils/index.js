@@ -17,3 +17,7 @@ export function getDOMSize(selector) {
 export function getWindowSize() {
     return [window.screen.width, window.screen.height]
 }
+
+export function mapRender(list, render) {
+     return list.map((item, index) => render(item, index));
+ }

@@ -2,16 +2,19 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build  ",
     "serve": "vite preview --port 8080",
     "server": "nodemon ./server/app.js"
   },
   "dependencies": {
     "@better-scroll/core": "^2.4.1",
     "@better-scroll/observe-dom": "^2.4.1",
+    "@better-scroll/slide": "^2.4.1",
     "antd-mobile": "^2.3.4",
     "axios": "^0.21.1",
+    "indexof": "^0.0.1",
     "postcss-pxtorem": "^6.0.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-keep-alive": "^2.5.2",

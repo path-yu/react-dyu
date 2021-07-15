@@ -44,9 +44,18 @@
 
 .bannerWrap {
     margin-top: 10px;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 40%;
+    overflow: hidden;
 
-    img {
-        border-radius: 10px;
+    .banner-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -60,10 +69,11 @@
 
 // 推荐页面 直播分类列表样式
 .categoryWrap {
+
+    width: calc((70px * 24) / 2);
+    height: 200px;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
-    padding: 8px;
 
     >div {
         display: flex;
@@ -72,6 +82,8 @@
         overflow: hidden;
         white-space: nowrap;
         margin-top: 10px;
+        margin-left: 10px;
+
         img {
             width: 55px;
             height: 55px;
@@ -102,7 +114,7 @@
     >div {
         position: relative;
         width: 170px;
-        height: 170px;
+        height: 150px;
         margin-top: 12px;
         border-radius: 10px;
         overflow: hidden;
@@ -122,7 +134,7 @@
                 text-overflow: ellipsis;
                 overflow: hidden;
                 white-space: nowrap;
-                font-size: 15px;
+                font-size: 13px;
             }
 
             >.tag {
@@ -135,12 +147,34 @@
 
         .onlineCount {
             position: absolute;
-            bottom: 60px;
-            right: 15px;
+            top: 0;
+            right: 0;
             color: white;
             font-size: 10px;
             background: linear-gradient(0deg, rgba(0, 0, 0, .85), transparent);
 
+        }
+
+        .nickName {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            bottom: 38px;
+            left: 0;
+            font-size: 10px;
+            color: white;
+            background: linear-gradient(0deg, rgba(0, 0, 0, .85), transparent);
+
+            i {
+                display: block;
+                width: 11px;
+                height: 12px;
+                margin-right: 3px;
+                background: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/iconfont-wo_fdcada2.png) no-repeat;
+                -webkit-background-size: 100% 100%;
+                -moz-background-size: 100% 100%;
+                background-size: 100% 100%;
+            }
         }
     }
 }
