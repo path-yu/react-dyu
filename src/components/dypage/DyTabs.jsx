@@ -1,77 +1,79 @@
-import { Tabs, WhiteSpace } from "antd-mobile";
-import React, { useEffect, useState } from "react";
+import ScrollableTabsButtonAuto from '@/components/ScrollableTabsButtonAuto/ScrollableTabsButtonAuto';
+import React, { useEffect, useRef, useState } from "react";
 import http from "../../http";
 import { getDOMSize, getWindowSize } from "../../utils/index";
 import Scroll from "../base/scroll/scroll";
-import DyHome from "./DyHome";
+import DyBanner from "./DyBanner/DyBanner";
+import DyCategory from "./DyCategory";
 import LiveRoomList from "./LiveRoomList";
 function DyTabs() {
   const [dyNavList, setDyNavList] = useState([
-    { tag_id: "0", tag_name: "全部" },
     { tag_id: "1", tag_name: "推荐" },
   ]);
+  const ref = useRef();
+  let requestData = ref.current ? ref.current.getLiveListData : null;
+  useEffect(() => {
+    if (dyNavList.length === 1) {
+      getNavListData();
+    }
+  }, [dyNavList.length]);
   function getNavListData() {
     http("/cateList").then((res) => {
       setDyNavList((state) => state.concat(res.data));
     });
   }
-  useEffect(() => {
-    if (dyNavList.length === 2) {
-      getNavListData();
-    }
-  },[]);
+
   // 计算scroll 组件根wrapper的高度, 好达到滚动的高度
   function computeRootHeight(calcHeight) {
-    const HeaderTopHeight = getDOMSize(".HeaderTop")[1];
-    const tabsHeight = getDOMSize(
-      ".HeaderTabsWrapper .am-tabs-tab-bar-wrap"
-    )[1];
-    const res = getWindowSize()[1] - HeaderTopHeight - tabsHeight - 20;
+    const tabsHeight = getDOMSize(".tabsWrapper")[1];
+    const res = getWindowSize()[1] - tabsHeight;
     return res + "px";
   }
-  function renderTabsContent() {
-    return dyNavList.map((item, index) => {
+ const renderItem =  (item, index) => {
       const Element =
         item.tag_name === "推荐" ? (
-          <DyHome />
+          <div>
+            {/* 轮播图 */}
+            <DyBanner />
+            {/*  分类列表 */}
+            <DyCategory />
+            {/* 推荐直播列表 */}
+            <LiveRoomList
+              tagId={item.tag_id}
+              cateId={item.cate_id}
+              type={item.shortName}
+              ref={ref}
+            />
+          </div>
         ) : (
           <LiveRoomList
-            key={index}
             tagId={item.tag_id}
-            api="subLiveList"
             cateId={item.cate_id}
             type={item.shortName}
+            ref={ref}
           />
         );
-
       return (
         <Scroll
           pulldownRefresh={true}
           CalcHeight={computeRootHeight}
+          pulldownRequestData={requestData}
+          pullDownRequestDataArg={item}
           key={index}
         >
           {Element}
         </Scroll>
       );
-    });
+    }
+  function renderTabsContent() {
+    return dyNavList.map(renderItem);
   }
   return (
     <div className="HeaderTabsWrapper">
-      <WhiteSpace />
-      <Tabs
+      <ScrollableTabsButtonAuto
+        renderTabsContent={renderItem}
         tabs={dyNavList}
-        initialPage={1}
-        distanceToChangeTab={0.6}
-        prerenderingSiblingsNumber={0}
-        swipeable={false}
-        onTabClick={(tab, index) => {
-          document.title = tab["tag_name"];
-        }}
-        renderTab={(tab) => <p>{tab.tag_name}</p>}
-      >
-        {renderTabsContent()}
-      </Tabs>
-      <WhiteSpace />
+      ></ScrollableTabsButtonAuto>
     </div>
   );
 }

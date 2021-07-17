@@ -1,45 +1,70 @@
 import useLoading from "@/common/useLoading";
-import React, { useEffect, useState } from "react";
+import { shuffle } from "@/utils";
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle, useState
+} from "react";
 import { useHistory } from "react-router-dom";
 import http from "../../http";
-
-
-function LiveRoomList(props) {
+const age = 43;
+function LiveRoomList(props, ref) {
   const type = props.type;
-  const [LiveRoomList, setLiveRoomList] = useState([]);
+  LiveRoomList.type = type;
+  const [RoomList, setRoomList] = useState([]);
   const [page, setPage] = useState(1);
-  let { RenderElement, setLoading, loading } = useLoading(
+  let { RenderElement, setLoading, setEmpty, setIsError,loading } = useLoading(
     true,
     RenderRoomList,
-    {}
+    { isCenter: true }
   );
   const { push } = useHistory();
-
   useEffect(() => {
-      console.log('live');
-    if (!LiveRoomList.length) {
+    console.log("effect", props);
+    if (!RoomList.length) {
       getLiveListData();
     }
-  },[]);
-  function getLiveListData() {
-    http("/liveRoomList", {
+    return () => {
+      console.log("distort", props);
+    };
+  }, [props]);
+  useImperativeHandle(
+    ref,
+    () => ({
+      getLiveListData,
+    }),
+    [props]
+  );
+  console.log("render", props);
+  function getLiveListData(arg) {
+   const typeArg = arg ? arg.shortName : type;
+    console.log("get", props);
+    if(arg) return;
+    return http("/liveRoomList", {
       params: {
-        type,
-        page,
+        type:typeArg,
+        page
       },
-    }).then((res) => {
-      setLoading(false);
-      setLiveRoomList(res.data.list);
-    });
+    })
+      .then((res) => {
+        setLoading(false);
+        if (!res.data.list.length) {
+          return setEmpty(true);
+        }
+        setRoomList([...shuffle(res.data.list)]);
+      },err => {
+        setIsError(true)
+      }).catch(error =>{
+        console.log(error);
+      })
   }
   const toLiveRoom = () => push("/liveroom");
-
-  function RenderRoomList (){
+  function RenderRoomList() {
     return (
       <div className="LiveRoomList">
-        {LiveRoomList.map((item, index) => {
+        {RoomList.map((item, index) => {
           return (
-            <div key={index} onClick={toLiveRoom}>
+            <div key={item.rid+index} onClick={toLiveRoom}>
               <img src={item.roomSrc} alt="" />
               <span className="onlineCount">{item.hn}</span>
               <p className="nickName">
@@ -54,8 +79,8 @@ function LiveRoomList(props) {
         })}
       </div>
     );
-  };
+  }
 
   return <RenderElement></RenderElement>;
 }
-export default LiveRoomList
+export default forwardRef(LiveRoomList);

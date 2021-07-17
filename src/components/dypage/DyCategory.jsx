@@ -1,38 +1,37 @@
-import React, { useEffect, useRef, useState } from "react";
+import http from '@/http';
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import useEmpty from "../../common/useEmpty";
 import useLoading from "../../common/useLoading";
-import http from "../../http";
 import { mapRender } from "../../utils";
-import Empty from "../base/empty/empty";
 import Scroll from "../base/scroll/scroll";
-
 function DyCategory(props) {
   const [categoryList, setCategoryList] = useState([]);
   const { image, description, handleError } = useEmpty();
-  const ref = useRef(null);
   const { push } = useHistory();
 
-  let { RenderElement, setLoading, loading } = useLoading(
+  let { RenderElement, setLoading, setIsError, setEmpty,loading } = useLoading(
     true,
     result,
-    {},
+    {}
   );
-
   useEffect(() => {
     getCategoryData();
   }, []);
   async function getCategoryData() {
-    http("/getColumnList")
+    return http("/getColumnList")
       .then((res) => {
         setLoading(false);
+        if(!res.data.length){
+          return setEmpty(true);
+        }
         if (!categoryList.length) {
           setCategoryList(res.data);
         }
       })
       .catch((err) => {
         setLoading(false);
-        handleError(err);
+        setIsError(err);
       });
   }
 
@@ -53,18 +52,14 @@ function DyCategory(props) {
 
   function result() {
     return (
-      <Scroll direction='x' options={{scrollX:true}}>
+      <Scroll  direction="x" options={{ scrollX: true }}>
         <div className="categoryWrap">
           {mapRender(categoryList, categoryItem)}
         </div>
       </Scroll>
     );
   }
-  return !loading && !categoryList.length ? (
-    <Empty image={image} description={description}></Empty>
-  ) : (
-   <RenderElement />
-  );
+  return <RenderElement />;
 }
 
 export default DyCategory;

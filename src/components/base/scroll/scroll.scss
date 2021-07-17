@@ -1,10 +1,14 @@
 .horizontal {
+    width: 98vw;
+    margin: auto;
     overflow: hidden;
 }
-
+.roofRef{
+    overflow: hidden;
+}
 .pulldown-bswrapper {
     position: relative;
-
+    font-size: 15px;
     .pulldown-wrapper {
         position: absolute;
         width: 100%;

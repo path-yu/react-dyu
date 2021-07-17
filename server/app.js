@@ -38,7 +38,7 @@ app.get('/api/cateList', async (req,res,next) => {
       cate_id: v.cate2Id
     }
   })
-  res.json(mapData);
+  res.json(mapData)
 });
 
 app.get('/api/banner',(req,res,next) => {
