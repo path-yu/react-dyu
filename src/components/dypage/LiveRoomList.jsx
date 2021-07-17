@@ -13,33 +13,32 @@ function LiveRoomList(props, ref) {
   LiveRoomList.type = type;
   const [RoomList, setRoomList] = useState([]);
   const [page, setPage] = useState(1);
+  const [fresh,setFresh] = useState(false);
   let { RenderElement, setLoading, setEmpty, setIsError,loading } = useLoading(
     true,
     RenderRoomList,
-    { isCenter: true }
+    { isCenter: true },
+    props
   );
   const { push } = useHistory();
   useEffect(() => {
-    console.log("effect", props);
     if (!RoomList.length) {
       getLiveListData();
     }
     return () => {
       console.log("distort", props);
     };
-  }, [props]);
+  }, []);
   useImperativeHandle(
     ref,
     () => ({
-      getLiveListData,
+      getData: getLiveListData,
     }),
-    [props]
+    []
   );
-  console.log("render", props);
   function getLiveListData(arg) {
    const typeArg = arg ? arg.shortName : type;
-    console.log("get", props);
-    if(arg) return;
+   console.log(props);
     return http("/liveRoomList", {
       params: {
         type:typeArg,

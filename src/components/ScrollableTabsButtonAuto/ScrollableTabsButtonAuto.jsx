@@ -87,7 +87,7 @@ export default function ScrollableTabsButtonAuto(props) {
         tabs.map((item,index) => {
           return (
             <TabPanel key={index} value={value} index={index}>
-              <div style={{overflow:'hidden',marginTop:'5px'}}>{renderTabsContent(item)}</div>
+              <div style={{overflow:'hidden',marginTop:'5px'}}>{renderTabsContent(item,index)}</div>
             </TabPanel>
           );
         })

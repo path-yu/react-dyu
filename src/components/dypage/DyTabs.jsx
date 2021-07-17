@@ -1,5 +1,5 @@
 import ScrollableTabsButtonAuto from '@/components/ScrollableTabsButtonAuto/ScrollableTabsButtonAuto';
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import http from "../../http";
 import { getDOMSize, getWindowSize } from "../../utils/index";
 import Scroll from "../base/scroll/scroll";
@@ -11,7 +11,9 @@ function DyTabs() {
     { tag_id: "1", tag_name: "推荐" },
   ]);
   const ref = useRef();
-  let requestData = ref.current ? ref.current.getLiveListData : null;
+  const requestData = useCallback(() => {
+    return ref.current.getData;
+  }, [ref.current]);
   useEffect(() => {
     if (dyNavList.length === 1) {
       getNavListData();
@@ -43,6 +45,7 @@ function DyTabs() {
               cateId={item.cate_id}
               type={item.shortName}
               ref={ref}
+              index={index}
             />
           </div>
         ) : (
@@ -51,15 +54,17 @@ function DyTabs() {
             cateId={item.cate_id}
             type={item.shortName}
             ref={ref}
+            index={index}
           />
         );
       return (
         <Scroll
           pulldownRefresh={true}
           CalcHeight={computeRootHeight}
-          pulldownRequestData={requestData}
           pullDownRequestDataArg={item}
           key={index}
+          childRef={ref}
+          pulldownRequestData={requestData}
         >
           {Element}
         </Scroll>

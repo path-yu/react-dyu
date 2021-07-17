@@ -1,12 +1,12 @@
 import useToggleDisplay from "@/common/useToggleDisplay";
 import BScroll from "@better-scroll/core";
 import ObserveDOM from "@better-scroll/observe-dom";
-import PullDown from '@better-scroll/pull-down';
+import PullDown from "@better-scroll/pull-down";
 import PropsTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 import PullDownOptions from "./constancePulldown";
 import "./scroll.scss";
-import usePullDown from './use-pulldown';
+import usePullDown from "./use-pulldown";
 BScroll.use(ObserveDOM);
 let timer = null;
 function Scroll(props) {
@@ -24,8 +24,7 @@ function Scroll(props) {
     pulldownRefresh = false,
     // 传递给scroll 组件的选项
     options,
-    pulldownRequestData, // 下拉刷新请求数据
-    pullDownRequestDataArg,
+    pulldownRequestData,
   } = props;
   useEffect(() => {
     let BScrollOption = {};
@@ -50,13 +49,13 @@ function Scroll(props) {
     return () => {
       scrollVal.destroy();
     };
-  }, [pulldownRequestData, props.children]);
+  }, []);
 
   function requestData() {
     clearTimeout(timer);
     return new Promise((resolve) => {
       timer = setTimeout(() => {
-        pulldownRequestData && pulldownRequestData(pullDownRequestDataArg);
+       pulldownRequestData()();
         resolve();
       }, 1000);
     });
@@ -97,10 +96,7 @@ function Scroll(props) {
       <div className="scroll_wrapper"> {props.children}</div>
     </div>
   ) : (
-    <div
-      className="rootRef horizontal"
-      ref={rootRef}
-    >
+    <div className="rootRef horizontal" ref={rootRef}>
       {props.children}
     </div>
   );
