@@ -3,20 +3,28 @@
     margin: auto;
     overflow: hidden;
 }
-.roofRef{
+
+.roofRef {
     overflow: hidden;
 }
+
 .pulldown-bswrapper {
     position: relative;
     font-size: 15px;
+
     .pulldown-wrapper {
         position: absolute;
         width: 100%;
-        padding: 20px ;
+        padding: 20px;
         box-sizing: border-box;
         transform: translateY(-100%) translateZ(0);
         text-align: center;
         color: #999
     }
-
+    .pullup-tips {
+        padding: 20px;
+        text-align: center;
+        color: #999;
+    }
 }
+

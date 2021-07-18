@@ -1,31 +1,45 @@
-import { Container } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import PropTypes from 'prop-types';
-import React from 'react';
-import './ScrollableTabsButtonAuto.scss';
+import { Container } from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar";
+import Box from "@material-ui/core/Box";
+import { makeStyles } from "@material-ui/core/styles";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
+import PropTypes from "prop-types";
+import React, { useEffect, useRef, useState } from "react";
+import "./ScrollableTabsButtonAuto.scss";
 
-
+const cacheELe = [];
 const useContainerStyles = makeStyles((theme) => ({
   root: {
-   padding:0
+    padding: 0,
   },
 }));
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index, renderSign, ...other } = props;
+  const renderBool = renderSign.current[index];
+  if (renderBool) {
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`scrollable-auto-tabpanel-${index}`}
+        {...other}
+      >
+        <Container className={useContainerStyles().root}>
+          <Box>{children}</Box>
+        </Container>
+      </div>
+    );
+  }
 
   return (
     <div
       role="tabpanel"
       hidden={value !== index}
       id={`scrollable-auto-tabpanel-${index}`}
-      aria-labelledby={`scrollable-auto-tab-${index}`}
       {...other}
     >
-      {value === index && (
+      {!renderBool && index === value && (
         <Container className={useContainerStyles().root}>
           <Box>{children}</Box>
         </Container>
@@ -43,26 +57,33 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+    "aria-controls": `scrollable-auto-tabpanel-${index}`,
   };
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    width: '100%',
+    width: "100%",
     backgroundColor: theme.palette.background.paper,
   },
 }));
 
 export default function ScrollableTabsButtonAuto(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-  const { tabs, renderTabsContent } = props;
+  const [value, setValue] = useState(0);
+  const { tabs, renderTabsContent, keyName } = props;
+  const renderSign = useRef(Array(tabs.length).fill(false));
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  useEffect(() => {
+    renderSign.current = Array(tabs.length).fill(false);
+  }, [tabs]);
+  useEffect(() => {
+    renderSign.current[value] = true;
+  }, [value]);
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -78,25 +99,29 @@ export default function ScrollableTabsButtonAuto(props) {
         >
           {tabs.map((item, index) => {
             return (
-              <Tab label={item.tag_name} key={index} {...a11yProps(index)} />
+              <Tab label={item[keyName]} key={index} {...a11yProps(index)} />
             );
           })}
         </Tabs>
       </AppBar>
-      {
-        tabs.map((item,index) => {
-          return (
-            <TabPanel key={index} value={value} index={index}>
-              <div style={{overflow:'hidden',marginTop:'5px'}}>{renderTabsContent(item,index)}</div>
-            </TabPanel>
-          );
-        })
-      }      
-    
+      {tabs.map((item, index) => {
+        return (
+          <TabPanel
+            key={index}
+            value={value}
+            index={index}
+            renderSign={renderSign}
+          >
+            <div style={{ overflow: "hidden", marginTop: "5px" }}>
+              {renderTabsContent(item, index)}
+            </div>
+          </TabPanel>
+        );
+      })}
     </div>
   );
 }
 ScrollableTabsButtonAuto.propTypes = {
   tabs: PropTypes.array.isRequired,
-  renderTabsContent:PropTypes.func
+  renderTabsContent: PropTypes.func,
 };

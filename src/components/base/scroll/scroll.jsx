@@ -2,11 +2,13 @@ import useToggleDisplay from "@/common/useToggleDisplay";
 import BScroll from "@better-scroll/core";
 import ObserveDOM from "@better-scroll/observe-dom";
 import PullDown from "@better-scroll/pull-down";
+import PullUp from "@better-scroll/pull-up";
 import PropsTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 import PullDownOptions from "./constancePulldown";
 import "./scroll.scss";
 import usePullDown from "./use-pulldown";
+import usePullUp from "./use-pullUp";
 BScroll.use(ObserveDOM);
 let timer = null;
 function Scroll(props) {
@@ -18,21 +20,27 @@ function Scroll(props) {
     scrollRef,
     requestData
   );
+  const { isPullUpLoad, pullingUpHandler } = usePullUp(scrollRef, requestData);
   const {
     CalcHeight,
     direction,
-    pulldownRefresh = false,
+    pulldownRefresh,
     // 传递给scroll 组件的选项
     options,
     pulldownRequestData,
+    pullUpLoad,
   } = props;
+
   useEffect(() => {
     let BScrollOption = {};
+
     if (pulldownRefresh && direction === "y") {
       BScrollOption = { ...PullDownOptions };
       BScroll.use(PullDown);
     }
-
+    if (pullUpLoad && direction === "y") {
+      BScroll.use(PullUp);
+    }
     if (direction === "y" && CalcHeight) {
       setRootHeight(CalcHeight());
     }
@@ -41,10 +49,15 @@ function Scroll(props) {
       observeDOM: true,
       ...options,
       ...BScrollOption,
+      pullUpLoad,
     });
     scrollRef.current = scrollVal;
+
     if (pulldownRefresh) {
       scrollVal.on("pullingDown", pullingDownHandler);
+    }
+    if(pullUpLoad){
+     scrollVal.on("pullingUp", pullingUpHandler);
     }
     return () => {
       scrollVal.destroy();
@@ -55,12 +68,12 @@ function Scroll(props) {
     clearTimeout(timer);
     return new Promise((resolve) => {
       timer = setTimeout(() => {
-       pulldownRequestData()();
+        pulldownRequestData()();
         resolve();
-      }, 1000);
+      }, 500);
     });
   }
-  if (direction === "y" && pulldownRefresh) {
+  if (direction === "y" && pulldownRefresh && !pullUpLoad) {
     const ele = (
       <div
         className=" rootRef pulldown-bswrapper"
@@ -87,6 +100,43 @@ function Scroll(props) {
     );
     return ele;
   }
+  if (direction === "y" && pullUpLoad && pulldownRefresh) {
+    return (
+      <div
+        className=" rootRef pulldown-bswrapper"
+        style={{ height: rootHeight }}
+        ref={rootRef}
+      >
+        <div className="pulldown-scroller">
+          <div className="pulldown-wrapper">
+            <div style={useToggleDisplay(beforePullDown)}>
+              <span>Pull Down and refresh</span>
+            </div>
+            <div style={useToggleDisplay(!beforePullDown)}>
+              <div style={useToggleDisplay(isPullingDown)}>
+                <span>Loading...</span>
+              </div>
+              <div style={useToggleDisplay(!isPullingDown)}>
+                <span>Refresh success</span>
+              </div>
+            </div>
+          </div>
+          <div className="pulldown-list">{props.children}</div>
+          <div className="pullup-tips">
+            {!isPullUpLoad ? (
+              <div className="before-trigger">
+                <span className="pullup-txt">Pull up and load more</span>
+              </div>
+            ) : (
+              <div className="after-trigger">
+                <span className="pullup-txt">Loading...</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
   return direction === "y" ? (
     <div
       className="rootRef"
@@ -107,11 +157,13 @@ Scroll.propTypes = {
   pulldownRefresh: PropsTypes.bool, // 是否开启下拉属性
   options: PropsTypes.object,
   pulldownRequestData: PropsTypes.func, //传递给scroll 组件的选项
+  pullUpLoad: PropsTypes.bool,
 };
 Scroll.defaultProps = {
   direction: "y",
   pulldownRefresh: false,
   option: {},
   pulldownRequestData: null,
+  pullUpLoad: false,
 };
 export default Scroll;

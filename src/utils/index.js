@@ -1,10 +1,5 @@
-export function isPlainObject(val) {
-    if (toString.call(val) !== '[object Object]') {
-        return false
-    }
-    const prototype = Object.getPrototypeOf(val)
-    return prototype === null || prototype === Object.prototype
-}
+import { isDef, isNumeric } from "./validate";
+
 
 export function getDOMSize(selector) {
     const ele = document.querySelector(selector);
@@ -41,3 +36,12 @@ function swap(arr, i, j) {
     arr[i] = arr[j]
     arr[j] = t
 }
+
+
+export function addUnit(value){
+    if(!isDef(value)){
+        return undefined;
+    }
+    return isNumeric(value) ? `${value}px` : String(value);
+}
+

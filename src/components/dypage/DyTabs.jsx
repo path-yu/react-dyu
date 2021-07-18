@@ -1,4 +1,4 @@
-import ScrollableTabsButtonAuto from '@/components/ScrollableTabsButtonAuto/ScrollableTabsButtonAuto';
+import ScrollableTabsButtonAuto from "@/components/ScrollableTabsButtonAuto/ScrollableTabsButtonAuto";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import http from "../../http";
 import { getDOMSize, getWindowSize } from "../../utils/index";
@@ -11,9 +11,11 @@ function DyTabs() {
     { tag_id: "1", tag_name: "推荐" },
   ]);
   const ref = useRef();
+
   const requestData = useCallback(() => {
     return ref.current.getData;
   }, [ref.current]);
+
   useEffect(() => {
     if (dyNavList.length === 1) {
       getNavListData();
@@ -31,24 +33,15 @@ function DyTabs() {
     const res = getWindowSize()[1] - tabsHeight;
     return res + "px";
   }
- const renderItem =  (item, index) => {
-      const Element =
-        item.tag_name === "推荐" ? (
-          <div>
-            {/* 轮播图 */}
-            <DyBanner />
-            {/*  分类列表 */}
-            <DyCategory />
-            {/* 推荐直播列表 */}
-            <LiveRoomList
-              tagId={item.tag_id}
-              cateId={item.cate_id}
-              type={item.shortName}
-              ref={ref}
-              index={index}
-            />
-          </div>
-        ) : (
+  const renderItem = (item, index) => {
+    const Element =
+      item.tag_name === "推荐" ? (
+        <div>
+          {/* 轮播图 */}
+          <DyBanner />
+          {/*  分类列表 */}
+          <DyCategory />
+          {/* 推荐直播列表 */}
           <LiveRoomList
             tagId={item.tag_id}
             cateId={item.cate_id}
@@ -56,20 +49,30 @@ function DyTabs() {
             ref={ref}
             index={index}
           />
-        );
-      return (
-        <Scroll
-          pulldownRefresh={true}
-          CalcHeight={computeRootHeight}
-          pullDownRequestDataArg={item}
-          key={index}
-          childRef={ref}
-          pulldownRequestData={requestData}
-        >
-          {Element}
-        </Scroll>
+        </div>
+      ) : (
+        <LiveRoomList
+          tagId={item.tag_id}
+          cateId={item.cate_id}
+          type={item.shortName}
+          ref={ref}
+          index={index}
+        />
       );
-    }
+    return (
+      <Scroll
+        pulldownRefresh={true}
+        CalcHeight={computeRootHeight}
+        pullDownRequestDataArg={item}
+        key={index}
+        childRef={ref}
+        pullUpLoad={true}
+        pulldownRequestData={requestData}
+      >
+        {Element}
+      </Scroll>
+    );
+  };
   function renderTabsContent() {
     return dyNavList.map(renderItem);
   }
@@ -78,6 +81,7 @@ function DyTabs() {
       <ScrollableTabsButtonAuto
         renderTabsContent={renderItem}
         tabs={dyNavList}
+        keyName={"tag_name"}
       ></ScrollableTabsButtonAuto>
     </div>
   );

@@ -1,0 +1,54 @@
+
+
+$image-placeholder-text-color:#646566;
+$image-placeholder-font-size:14px;
+$image-placeholder-background-color:#f7f8fa;
+$image-loading-icon-size:34px;
+$mage-loading-icon-color:#969799;
+$image-error-icon-size:32px;
+$image-error-icon-color:#dcdee0;
+.image {
+    position: relative;
+    display: inline-block;
+
+    .round {
+        overflow: hidden;
+        border-radius: 50%;
+
+        img {
+            border-radius: inherit;
+        }
+    }
+
+    img,
+    .error,
+    .loading {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .error,
+    .loading {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: $image-placeholder-text-color;
+        font-size: $image-placeholder-font-size;
+        background-color: $image-placeholder-background-color;
+    }
+
+    .loading-icon {
+        color:$mage-loading-icon-color;
+        font-size: $image-loading-icon-size;
+    }
+
+    .error-icon {
+        color: $image-error-icon-color;
+        font-size: $image-error-icon-size;
+    }
+}

@@ -1,5 +1,6 @@
 import useLoading from "@/common/useLoading";
 import { shuffle } from "@/utils";
+import Image from 'material-ui-image';
 import React, {
   forwardRef,
   useEffect,
@@ -26,7 +27,6 @@ function LiveRoomList(props, ref) {
       getLiveListData();
     }
     return () => {
-      console.log("distort", props);
     };
   }, []);
   useImperativeHandle(
@@ -38,7 +38,6 @@ function LiveRoomList(props, ref) {
   );
   function getLiveListData(arg) {
    const typeArg = arg ? arg.shortName : type;
-   console.log(props);
     return http("/liveRoomList", {
       params: {
         type:typeArg,
@@ -63,14 +62,15 @@ function LiveRoomList(props, ref) {
       <div className="LiveRoomList">
         {RoomList.map((item, index) => {
           return (
-            <div key={item.rid+index} onClick={toLiveRoom}>
-              <img src={item.roomSrc} alt="" />
+            <div className='liveRoomItem' key={item.rid + index} onClick={toLiveRoom}>
+              {/* <img src={item.roomSrc} alt="" /> */}
+              <Image style={{height:'100px',padding:0}} src={item.roomSrc} imageStyle={{width:'100%',height:'100px'}} />
               <span className="onlineCount">{item.hn}</span>
               <p className="nickName">
                 <i className="NormalRoomItem-showAnchorIcon"></i>
                 <span>{item.nickname}</span>
               </p>
-              <div>
+              <div className="roomName">
                 <p> {item.roomName} </p>
               </div>
             </div>

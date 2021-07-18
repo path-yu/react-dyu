@@ -26,7 +26,7 @@ export default function usePullDown(bscroll, requestData) {
              bscroll.current.refresh()
         }, TIME_BOUNCE + 100)
     };
-
+ 
     return {
         THRESHOLD,
         stop,
