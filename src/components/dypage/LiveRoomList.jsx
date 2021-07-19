@@ -1,21 +1,23 @@
 import useLoading from "@/common/useLoading";
 import { shuffle } from "@/utils";
-import Image from 'material-ui-image';
+import Image from "material-ui-image";
 import React, {
   forwardRef,
   useEffect,
-  useImperativeHandle, useState
+  useImperativeHandle,
+  useRef,
+  useState
 } from "react";
 import { useHistory } from "react-router-dom";
 import http from "../../http";
 const age = 43;
 function LiveRoomList(props, ref) {
-  const type = props.type;
+  let type = props.type;
   LiveRoomList.type = type;
   const [RoomList, setRoomList] = useState([]);
-  const [page, setPage] = useState(1);
-  const [fresh,setFresh] = useState(false);
-  let { RenderElement, setLoading, setEmpty, setIsError,loading } = useLoading(
+  const page = useRef(1);
+  const maxPage = useRef(null);
+  let { RenderElement, setLoading, setEmpty, setIsError, loading } = useLoading(
     true,
     RenderRoomList,
     { isCenter: true },
@@ -26,35 +28,78 @@ function LiveRoomList(props, ref) {
     if (!RoomList.length) {
       getLiveListData();
     }
-    return () => {
-    };
-  }, []);
+  }, [props]);
   useImperativeHandle(
     ref,
-    () => ({
-      getData: getLiveListData,
-    }),
+    () => {
+     const res = {};
+     // 利用type来标记每个组件实例方法
+     res[type] = {
+       getLiveListData,
+       getNextLiveListData,
+       props
+     };
+     // 如果直接返回res, 当多次调用这个组件是,最后一次的总会覆盖掉前面的
+     // 导致我们不能通过ref获取到每个组件实例的方法,
+     //因此我们需要将先前的current和本次的对象合并
+     return Object.assign(res,ref.current);
+    },
     []
   );
   function getLiveListData(arg) {
-   const typeArg = arg ? arg.shortName : type;
+    page.current = 1;
     return http("/liveRoomList", {
       params: {
-        type:typeArg,
-        page
+        type:type === 'tj' ? undefined :type,
+        page: page.current,
       },
     })
-      .then((res) => {
-        setLoading(false);
-        if (!res.data.list.length) {
-          return setEmpty(true);
+      .then(
+        (res) => {
+          setLoading(false);
+          if (!res.data.list.length) {
+            return setEmpty(true);
+          }
+          maxPage.current = res.pageCount;
+          setRoomList([...shuffle(res.data.list)]);
+        },
+        (err) => {
+          setIsError(true);
         }
-        setRoomList([...shuffle(res.data.list)]);
-      },err => {
-        setIsError(true)
-      }).catch(error =>{
+      )
+      .catch((error) => {
         console.log(error);
-      })
+      });
+  }
+  function getNextLiveListData() {
+    page.current = page.current + 1;
+    if (page.current > maxPage.current) return Promise.resolve(true);
+    if (page.current >= 3) {
+      console.log("page", 'return');
+      return Promise.resolve(true);
+    }
+    return http("/liveRoomList", {
+      params: {
+        type,
+        page: page.current,
+      },
+    })
+      .then(
+        (res) => {
+          // 返回true 表示数据为空
+          if (!res.data.list.length) {
+            return true;
+          }
+          setRoomList((list) => list.concat(res.data.list));
+          return false;
+        },
+        (err) => {
+          return err;
+        }
+      )
+      .catch((error) => {
+        console.log(error);
+      });
   }
   const toLiveRoom = () => push("/liveroom");
   function RenderRoomList() {
@@ -62,9 +107,17 @@ function LiveRoomList(props, ref) {
       <div className="LiveRoomList">
         {RoomList.map((item, index) => {
           return (
-            <div className='liveRoomItem' key={item.rid + index} onClick={toLiveRoom}>
+            <div
+              className="liveRoomItem"
+              key={item.rid + index}
+              onClick={toLiveRoom}
+            >
               {/* <img src={item.roomSrc} alt="" /> */}
-              <Image style={{height:'100px',padding:0}} src={item.roomSrc} imageStyle={{width:'100%',height:'100px'}} />
+              <Image
+                style={{ height: "115px", padding: 0 }}
+                src={item.roomSrc}
+                imageStyle={{ width: "100%", height: "115px" }}
+              />
               <span className="onlineCount">{item.hn}</span>
               <p className="nickName">
                 <i className="NormalRoomItem-showAnchorIcon"></i>

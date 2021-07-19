@@ -17,7 +17,8 @@ const useContainerStyles = makeStyles((theme) => ({
 function TabPanel(props) {
   const { children, value, index, renderSign, ...other } = props;
   const renderBool = renderSign.current[index];
-  if (renderBool) {
+   
+  if (renderBool || index === 0) {
     return (
       <div
         role="tabpanel"
@@ -31,7 +32,7 @@ function TabPanel(props) {
       </div>
     );
   }
-
+ 
   return (
     <div
       role="tabpanel"
@@ -39,7 +40,7 @@ function TabPanel(props) {
       id={`scrollable-auto-tabpanel-${index}`}
       {...other}
     >
-      {!renderBool && index === value && (
+      {index === value && (
         <Container className={useContainerStyles().root}>
           <Box>{children}</Box>
         </Container>
@@ -72,11 +73,13 @@ const useStyles = makeStyles((theme) => ({
 export default function ScrollableTabsButtonAuto(props) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
-  const { tabs, renderTabsContent, keyName } = props;
+  const { tabs, renderTabsContent, keyName,onChange } = props;
   const renderSign = useRef(Array(tabs.length).fill(false));
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    // 派发change事件
+    onChange(newValue);
   };
   useEffect(() => {
     renderSign.current = Array(tabs.length).fill(false);
@@ -99,7 +102,11 @@ export default function ScrollableTabsButtonAuto(props) {
         >
           {tabs.map((item, index) => {
             return (
-              <Tab label={item[keyName]} key={index} {...a11yProps(index)} />
+              <Tab
+                label={item[keyName]}
+                key={item.cate_id}
+                {...a11yProps(index)}
+              />
             );
           })}
         </Tabs>
@@ -107,7 +114,7 @@ export default function ScrollableTabsButtonAuto(props) {
       {tabs.map((item, index) => {
         return (
           <TabPanel
-            key={index}
+            key={item.cate_id}
             value={value}
             index={index}
             renderSign={renderSign}

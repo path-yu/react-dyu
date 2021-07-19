@@ -12,15 +12,6 @@ import usePullUp from "./use-pullUp";
 BScroll.use(ObserveDOM);
 let timer = null;
 function Scroll(props) {
-  const rootRef = useRef(null);
-  let scrollRef = useRef(null);
-  const [rootHeight, setRootHeight] = useState("100vh");
-  const [rootWidth, setRootWidth] = useState("100vw");
-  const { isPullingDown, beforePullDown, pullingDownHandler } = usePullDown(
-    scrollRef,
-    requestData
-  );
-  const { isPullUpLoad, pullingUpHandler } = usePullUp(scrollRef, requestData);
   const {
     CalcHeight,
     direction,
@@ -29,7 +20,21 @@ function Scroll(props) {
     options,
     pulldownRequestData,
     pullUpLoad,
+    getNextPageData,
+    childRef,
   } = props;
+  const rootRef = useRef(null);
+  let scrollRef = useRef(null);
+  const [rootHeight, setRootHeight] = useState("100vh");
+  const [rootWidth, setRootWidth] = useState("100vw");
+  const { isPullingDown, beforePullDown, pullingDownHandler } = usePullDown(
+    scrollRef,
+    wrapperCallback(500, pulldownRequestData)
+  );
+  const { isPullUpLoad, pullingUpHandler, isLoadingMore } = usePullUp(
+    scrollRef,
+    wrapperCallback(500, getNextPageData)
+  );
 
   useEffect(() => {
     let BScrollOption = {};
@@ -56,22 +61,49 @@ function Scroll(props) {
     if (pulldownRefresh) {
       scrollVal.on("pullingDown", pullingDownHandler);
     }
-    if(pullUpLoad){
-     scrollVal.on("pullingUp", pullingUpHandler);
+    if (pullUpLoad) {
+      scrollVal.on("pullingUp", pullingUpHandler);
     }
     return () => {
       scrollVal.destroy();
     };
   }, []);
 
-  function requestData() {
-    clearTimeout(timer);
-    return new Promise((resolve) => {
-      timer = setTimeout(() => {
-        pulldownRequestData()();
-        resolve();
-      }, 500);
-    });
+  function wrapperCallback(delay, requestDataCallback) {
+    let timer = null;
+    return function () {
+      return new Promise((resolve) => {
+        clearTimeout(timer);
+        timer = setTimeout(async () => {
+          const res = await requestDataCallback()();
+          resolve(res);
+        }, delay);
+      });
+    };
+  }
+  if (direction === "y" && pullUpLoad && !pulldownRefresh) {
+    return (
+      <div
+        className=" rootRef pulldown-bswrapper"
+        style={{ height: rootHeight }}
+        ref={rootRef}
+      >
+        <div className="pulldown-scroller">
+          <div className="pulldown-list">{props.children}</div>
+          <div className="pullup-tips">
+            {!isPullUpLoad && isLoadingMore ? (
+              <div className="before-trigger">
+                <span className="pullup-txt">Pull up and load more</span>
+              </div>
+            ) : (
+              <div className="after-trigger">
+                <span className="pullup-txt">Loading...</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
   }
   if (direction === "y" && pulldownRefresh && !pullUpLoad) {
     const ele = (
@@ -123,15 +155,19 @@ function Scroll(props) {
           </div>
           <div className="pulldown-list">{props.children}</div>
           <div className="pullup-tips">
-            {!isPullUpLoad ? (
+            {!isPullUpLoad && isLoadingMore ? (
               <div className="before-trigger">
                 <span className="pullup-txt">Pull up and load more</span>
               </div>
             ) : (
-              <div className="after-trigger">
-                <span className="pullup-txt">Loading...</span>
-              </div>
+              isPullUpLoad &&
+              isLoadingMore && (
+                <div className="after-trigger">
+                  <span className="pullup-txt">Loading...</span>
+                </div>
+              )
             )}
+            <div style={useToggleDisplay(!isLoadingMore)}>我也是有底线的</div>
           </div>
         </div>
       </div>

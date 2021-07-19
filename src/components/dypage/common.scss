@@ -114,7 +114,6 @@
     >.liveRoomItem {
         position: relative;
         width: 170px;
-        height: 150px;
         margin-top: 12px;
         border-radius: 10px;
         overflow: hidden;
@@ -125,11 +124,9 @@
         }
 
         >.roomName {
-            height: 50px;
             padding: 6px 6px 10px;
 
             p {
-                margin-bottom: 10px;
                 text-overflow: ellipsis;
                 overflow: hidden;
                 white-space: nowrap;

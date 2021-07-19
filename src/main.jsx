@@ -8,7 +8,6 @@ import './common/reset.css'
 import './components/dypage/common.scss'
 import './public/index.css'
 import './utils/rem'
-
 ReactDOM.render(
   <Router>
     <Provider> 

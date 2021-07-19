@@ -6,27 +6,36 @@ import Scroll from "../base/scroll/scroll";
 import DyBanner from "./DyBanner/DyBanner";
 import DyCategory from "./DyCategory";
 import LiveRoomList from "./LiveRoomList";
+const liveRoomRefMap = {};
 function DyTabs() {
   const [dyNavList, setDyNavList] = useState([
-    { tag_id: "1", tag_name: "推荐" },
+    { tag_id: 999, tag_name: "推荐", cate_id: 998, shortName: "tj" },
   ]);
   const ref = useRef();
-
+  const type = useRef("tj");
+  
   const requestData = useCallback(() => {
-    return ref.current.getData;
-  }, [ref.current]);
+    console.log(ref.current[type.current]);
+    return ref.current[type.current].getLiveListData;
+  }, [ref]);
+  const getNextPageData = useCallback(() => {
+    return ref.current[type.current].getNextLiveListData;
+  }, [ref]);
 
   useEffect(() => {
     if (dyNavList.length === 1) {
       getNavListData();
     }
-  }, [dyNavList.length]);
+  }, [ref]);
+
   function getNavListData() {
     http("/cateList").then((res) => {
       setDyNavList((state) => state.concat(res.data));
     });
   }
-
+  function onChange(newVal) {
+    type.current = dyNavList[newVal].shortName;
+  }
   // 计算scroll 组件根wrapper的高度, 好达到滚动的高度
   function computeRootHeight(calcHeight) {
     const tabsHeight = getDOMSize(".tabsWrapper")[1];
@@ -47,7 +56,6 @@ function DyTabs() {
             cateId={item.cate_id}
             type={item.shortName}
             ref={ref}
-            index={index}
           />
         </div>
       ) : (
@@ -56,7 +64,6 @@ function DyTabs() {
           cateId={item.cate_id}
           type={item.shortName}
           ref={ref}
-          index={index}
         />
       );
     return (
@@ -64,24 +71,25 @@ function DyTabs() {
         pulldownRefresh={true}
         CalcHeight={computeRootHeight}
         pullDownRequestDataArg={item}
-        key={index}
-        childRef={ref}
+        key={item.cate_id}
         pullUpLoad={true}
         pulldownRequestData={requestData}
+        getNextPageData={getNextPageData}
       >
         {Element}
       </Scroll>
     );
   };
-  function renderTabsContent() {
-    return dyNavList.map(renderItem);
-  }
+  // function renderTabsContent() {
+  //   return dyNavList.map(renderItem);
+  // }
   return (
     <div className="HeaderTabsWrapper">
       <ScrollableTabsButtonAuto
         renderTabsContent={renderItem}
         tabs={dyNavList}
         keyName={"tag_name"}
+        onChange={onChange}
       ></ScrollableTabsButtonAuto>
     </div>
   );
