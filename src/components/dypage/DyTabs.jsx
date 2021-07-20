@@ -18,6 +18,7 @@ function DyTabs() {
     console.log(ref.current[type.current]);
     return ref.current[type.current].getLiveListData;
   }, [ref]);
+  
   const getNextPageData = useCallback(() => {
     return ref.current[type.current].getNextLiveListData;
   }, [ref]);
@@ -27,7 +28,11 @@ function DyTabs() {
       getNavListData();
     }
   }, [ref]);
-
+  useEffect(() => {
+    return () => {
+      console.log('dist');
+    }
+  })
   function getNavListData() {
     http("/cateList").then((res) => {
       setDyNavList((state) => state.concat(res.data));

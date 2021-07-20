@@ -6,7 +6,6 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
-import "./ScrollableTabsButtonAuto.scss";
 
 const cacheELe = [];
 const useContainerStyles = makeStyles((theme) => ({
@@ -77,10 +76,17 @@ export default function ScrollableTabsButtonAuto(props) {
   const renderSign = useRef(Array(tabs.length).fill(false));
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    // setValue(newValue);
+    console.log(event);
+    // console.log(event);
     // 派发change事件
-    onChange(newValue);
+  //  onChange && onChange(newValue);
   };
+  useEffect(() => {
+    return () => {
+      console.log('destroy');
+    }
+  })
   useEffect(() => {
     renderSign.current = Array(tabs.length).fill(false);
   }, [tabs]);
@@ -92,7 +98,9 @@ export default function ScrollableTabsButtonAuto(props) {
       <AppBar position="static" color="default">
         <Tabs
           value={value}
-          onChange={handleChange}
+          onChange={() =>{
+            console.log('434');
+          }}
           indicatorColor="primary"
           textColor="primary"
           variant="scrollable"
@@ -105,6 +113,7 @@ export default function ScrollableTabsButtonAuto(props) {
               <Tab
                 label={item[keyName]}
                 key={item.cate_id}
+                onClick={handleChange}
                 {...a11yProps(index)}
               />
             );
@@ -119,7 +128,7 @@ export default function ScrollableTabsButtonAuto(props) {
             index={index}
             renderSign={renderSign}
           >
-            <div style={{ overflow: "hidden", marginTop: "5px" }}>
+            <div  style={{ overflow: "hidden", marginTop: "5px" }}>
               {renderTabsContent(item, index)}
             </div>
           </TabPanel>

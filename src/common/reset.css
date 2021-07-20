@@ -179,3 +179,13 @@ select {
 .MuiTab-wrapper{
     font-size: 14px;
 }
+.BottomNavigationAction{
+    font-size: 30px !important;
+}
+.MuiBottomNavigationAction-label{
+    font-size: 16px !important;
+}
+
+.MuiBox-root {
+    padding: 0 !important;
+}

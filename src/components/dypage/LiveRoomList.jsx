@@ -75,7 +75,6 @@ function LiveRoomList(props, ref) {
     page.current = page.current + 1;
     if (page.current > maxPage.current) return Promise.resolve(true);
     if (page.current >= 3) {
-      console.log("page", 'return');
       return Promise.resolve(true);
     }
     return http("/liveRoomList", {
@@ -101,7 +100,10 @@ function LiveRoomList(props, ref) {
         console.log(error);
       });
   }
-  const toLiveRoom = () => push("/liveroom");
+  const toLiveRoom = () => {
+    push("/liveroom");
+    console.log('434');
+  }
   function RenderRoomList() {
     return (
       <div className="LiveRoomList">
