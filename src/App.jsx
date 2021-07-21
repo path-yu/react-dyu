@@ -4,7 +4,7 @@ import {
   HomeSharp,
   MenuBookSharp
 } from "@material-ui/icons";
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { KeepAlive } from "react-keep-alive";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import "./App.css";
@@ -33,7 +33,8 @@ function App() {
     },
   ];
   const history = useHistory();
-  // const tabCurrent = useRef(tabBarDataList[0]);
+  const current = useRef(1);
+  const currentUrl = useMemo(() => (tabBarDataList[current.current].url),[current]);
   const style = {
     position: "fixed",
     width: "100vw",
@@ -64,10 +65,10 @@ function App() {
     history.push(tabBarDataList[index].url);
   }
 
-  function RenderRoute(routes) {
+  function RenderRoute(routes,RedirectUrl) {
     return (
       <>
-        <Redirect to="/"></Redirect>
+        <Redirect to={RedirectUrl}></Redirect>
         <Switch>
           {routes.map((item, index) => {
             let Component = item.component;
@@ -99,12 +100,13 @@ function App() {
   }
   return (
     <Layout className="App">
-      {RenderRoute(routes)}
+      {RenderRoute(routes, currentUrl)}
       {/* <DyPage></DyPage> */}
       <SimpleBottomNavigation
         style={style}
         tabBarList={tabBarDataList}
         onPress={handleOnPress}
+        current={current.current}
       ></SimpleBottomNavigation>
     </Layout>
   );

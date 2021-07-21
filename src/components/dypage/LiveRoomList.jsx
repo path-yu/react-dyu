@@ -13,36 +13,34 @@ import http from "../../http";
 const age = 43;
 function LiveRoomList(props, ref) {
   let type = props.type;
-  LiveRoomList.type = type;
   const [RoomList, setRoomList] = useState([]);
   const page = useRef(1);
   const maxPage = useRef(null);
-  let { RenderElement, setLoading, setEmpty, setIsError, loading } = useLoading(
+  let { RenderElement, setLoading, setEmpty, setIsError } = useLoading(
     true,
     RenderRoomList,
-    { isCenter: true },
-    props
+    { isCenter: true }
   );
   const { push } = useHistory();
   useEffect(() => {
     if (!RoomList.length) {
       getLiveListData();
     }
-  }, [props]);
+  }, []);
   useImperativeHandle(
     ref,
     () => {
-     const res = {};
-     // 利用type来标记每个组件实例方法
-     res[type] = {
-       getLiveListData,
-       getNextLiveListData,
-       props
-     };
-     // 如果直接返回res, 当多次调用这个组件是,最后一次的总会覆盖掉前面的
-     // 导致我们不能通过ref获取到每个组件实例的方法,
-     //因此我们需要将先前的current和本次的对象合并
-     return Object.assign(res,ref.current);
+      const res = {};
+      // 利用type来标记每个组件实例方法
+      res[type] = {
+        getLiveListData,
+        getNextLiveListData,
+        props,
+      };
+      // 如果直接返回res, 当多次调用这个组件是,最后一次的总会覆盖掉前面的
+      // 导致我们不能通过ref获取到每个组件实例的方法,
+      //因此我们需要将先前的current和本次的对象合并
+      return Object.assign(res, ref.current);
     },
     []
   );
@@ -50,7 +48,7 @@ function LiveRoomList(props, ref) {
     page.current = 1;
     return http("/liveRoomList", {
       params: {
-        type:type === 'tj' ? undefined :type,
+        type: type === "tj" ? undefined : type,
         page: page.current,
       },
     })
@@ -72,7 +70,6 @@ function LiveRoomList(props, ref) {
       });
   }
   function getNextLiveListData() {
-    page.current = page.current + 1;
     if (page.current > maxPage.current) return Promise.resolve(true);
     if (page.current >= 3) {
       return Promise.resolve(true);
@@ -80,7 +77,7 @@ function LiveRoomList(props, ref) {
     return http("/liveRoomList", {
       params: {
         type,
-        page: page.current,
+        page: page.current + 1,
       },
     })
       .then(
@@ -89,6 +86,8 @@ function LiveRoomList(props, ref) {
           if (!res.data.list.length) {
             return true;
           }
+          page.current = page.current + 1;
+
           setRoomList((list) => list.concat(res.data.list));
           return false;
         },
@@ -102,8 +101,8 @@ function LiveRoomList(props, ref) {
   }
   const toLiveRoom = () => {
     push("/liveroom");
-    console.log('434');
-  }
+    console.log("434");
+  };
   function RenderRoomList() {
     return (
       <div className="LiveRoomList">

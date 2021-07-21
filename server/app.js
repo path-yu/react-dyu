@@ -7,7 +7,9 @@ var cookieParser = require('cookie-parser');
 const axiosInstance = axios.create({
   baseURL: 'https://m.douyu.com/api'
 })
-
+const requestBookInstance = axios.create({
+  baseURL: ' http://47.106.243.172:8888/book'
+})
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -21,14 +23,16 @@ app.all('*', function (req, res, next) {
 });
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 console.log(path.join(__dirname, 'public'));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.get('/api/cateList', async (req,res,next) => {
+app.get('/api/cateList', async (req, res, next) => {
   const response = await axiosInstance('/cate/recList?cid=&ct=');
   const mapData = response.data.data.map(v => {
     return {
@@ -41,7 +45,7 @@ app.get('/api/cateList', async (req,res,next) => {
   res.json(mapData)
 });
 
-app.get('/api/banner',(req,res,next) => {
+app.get('/api/banner', (req, res, next) => {
   res.json({
     imgPreView: [
       "https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg",
@@ -54,10 +58,12 @@ app.get('/api/banner',(req,res,next) => {
     ]
   })
 })
-app.get('/api/liveRoomList',async (req,res,next) => {
-  const {type='LOL',page=1} = req.query;
-  const response = await axiosInstance('/room/list',{
-    params:{
+app.get('/api/liveRoomList', async (req, res, next) => {
+  const {
+    type = 'LOL', page = 1
+  } = req.query;
+  const response = await axiosInstance('/room/list', {
+    params: {
       page,
       type,
     }
@@ -65,13 +71,34 @@ app.get('/api/liveRoomList',async (req,res,next) => {
   res.json(response.data.data)
 });
 
-app.get('/api/getColumnList',async (req,res,next) => {
+app.get('/api/getColumnList', async (req, res, next) => {
   const response = await axiosInstance('/cate/list');
-  let cateList = response.data.data.cate2Info.slice(0,24)
+  let cateList = response.data.data.cate2Info.slice(0, 24)
   res.json(cateList)
 })
-
-app.listen(3001,() => {
+app.get('/api/book/searchByPage', async (req, res) => {
+  const {
+    curr = 1,
+      limit = 20,
+      catId = 1,
+  } = req.query;
+  console.log(req.query);
+  const response = await requestBookInstance('/searchByPage', {
+    params: {
+      curr,
+      limit,
+      catId,
+      sort: 'last_index_update_time'
+    }
+  });
+  const dataList = response.data.data.list;
+  response.data.data.list = dataList.map(item => {
+    item.picUrl = 'http://47.106.243.172:8888' + item.picUrl;
+    return item;
+  })
+  res.json(response.data);
+})
+app.listen(3001, () => {
   console.log('server start at 3001 port');
 })
 module.exports = app;

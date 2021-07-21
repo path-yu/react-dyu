@@ -7,7 +7,6 @@ import Tabs from "@material-ui/core/Tabs";
 import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 
-const cacheELe = [];
 const useContainerStyles = makeStyles((theme) => ({
   root: {
     padding: 0,
@@ -76,11 +75,9 @@ export default function ScrollableTabsButtonAuto(props) {
   const renderSign = useRef(Array(tabs.length).fill(false));
 
   const handleChange = (event, newValue) => {
-    // setValue(newValue);
-    console.log(event);
-    // console.log(event);
+    setValue(newValue);
     // 派发change事件
-  //  onChange && onChange(newValue);
+   onChange && onChange(newValue);
   };
   useEffect(() => {
     return () => {
@@ -98,9 +95,7 @@ export default function ScrollableTabsButtonAuto(props) {
       <AppBar position="static" color="default">
         <Tabs
           value={value}
-          onChange={() =>{
-            console.log('434');
-          }}
+          onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
           variant="scrollable"
@@ -110,12 +105,7 @@ export default function ScrollableTabsButtonAuto(props) {
         >
           {tabs.map((item, index) => {
             return (
-              <Tab
-                label={item[keyName]}
-                key={item.cate_id}
-                onClick={handleChange}
-                {...a11yProps(index)}
-              />
+              <Tab label={item[keyName]} key={index} {...a11yProps(index)} />
             );
           })}
         </Tabs>
@@ -123,7 +113,7 @@ export default function ScrollableTabsButtonAuto(props) {
       {tabs.map((item, index) => {
         return (
           <TabPanel
-            key={item.cate_id}
+            key={index}
             value={value}
             index={index}
             renderSign={renderSign}

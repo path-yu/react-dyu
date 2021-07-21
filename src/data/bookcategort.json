@@ -1,0 +1,74 @@
+{
+  "list": [
+    {
+      "id": "1",
+      "workDirection": "0",
+      "name": "玄幻奇幻",
+      "sort": null,
+      "createUserId": null,
+      "createTime": null,
+      "updateUserId": null,
+      "updateTime": null
+    },
+    {
+      "id": "2",
+      "workDirection": "0",
+      "name": "武侠仙侠",
+      "sort": null,
+      "createUserId": null,
+      "createTime": null,
+      "updateUserId": null,
+      "updateTime": null
+    },
+    {
+      "id": "3",
+      "workDirection": "0",
+      "name": "都市言情",
+      "sort": null,
+      "createUserId": null,
+      "createTime": null,
+      "updateUserId": null,
+      "updateTime": null
+    },
+    {
+      "id": "4",
+      "workDirection": "0",
+      "name": "历史军事",
+      "sort": null,
+      "createUserId": null,
+      "createTime": null,
+      "updateUserId": null,
+      "updateTime": null
+    },
+    {
+      "id": "5",
+      "workDirection": "0",
+      "name": "科幻灵异",
+      "sort": null,
+      "createUserId": null,
+      "createTime": null,
+      "updateUserId": null,
+      "updateTime": null
+    },
+    {
+      "id": "6",
+      "workDirection": "0",
+      "name": "网游竞技",
+      "sort": null,
+      "createUserId": null,
+      "createTime": null,
+      "updateUserId": null,
+      "updateTime": null
+    },
+    {
+      "id": "7",
+      "workDirection": "1",
+      "name": "女生频道",
+      "sort": null,
+      "createUserId": null,
+      "createTime": null,
+      "updateUserId": null,
+      "updateTime": null
+    }
+  ]
+}

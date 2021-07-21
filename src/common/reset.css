@@ -73,12 +73,12 @@ video {
     outline: 0;
     font-size: 100%;
     vertical-align: baseline;
-
     box-sizing: border-box;
 }
 
 body {
     line-height: 1;
+    font-size: 16px;
 }
 
 :focus {
@@ -180,10 +180,10 @@ select {
     font-size: 14px;
 }
 .BottomNavigationAction{
-    font-size: 30px !important;
+    font-size: 28px !important;
 }
 .MuiBottomNavigationAction-label{
-    font-size: 16px !important;
+    font-size: 15px !important;
 }
 
 .MuiBox-root {

@@ -1,21 +1,28 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 // 上拉加载更多钩子
 export default function usePullUp(bscroll, requestData) {
     const [isPullUpLoad, setIsPullUpLoad] = useState(false);
     const [isLoadingMore,setIsLoadingMore] = useState(true);
+    const preventPullUpLoad = useRef(false);
     async function pullingUpHandler(){
+        console.log(preventPullUpLoad.current);
         if (isLoadingMore === false) {
             bscroll.current.off("pullingUp", pullingUpHandler);
             return;
         }
-        setIsPullUpLoad(true);
 
-        const res =  await requestData();
-        console.log(res);
+        if (preventPullUpLoad.current){
+            bscroll.current.finishPullUp();
+            return
+        }
+        preventPullUpLoad.current = true;
+        const res = await requestData();
+        preventPullUpLoad.current = false;
         // 如果返回true 说明加载数据为空, 
         if(res === true){
-            setIsLoadingMore(false)
+            preventPullUpLoad.current = false;
+            setIsLoadingMore(false);
         }
         bscroll.current.finishPullUp();
         bscroll.current.refresh();

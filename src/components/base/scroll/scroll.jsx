@@ -21,7 +21,6 @@ function Scroll(props) {
     pulldownRequestData,
     pullUpLoad,
     getNextPageData,
-    childRef,
   } = props;
   const rootRef = useRef(null);
   let scrollRef = useRef(null);
@@ -33,7 +32,7 @@ function Scroll(props) {
   );
   const { isPullUpLoad, pullingUpHandler, isLoadingMore } = usePullUp(
     scrollRef,
-    wrapperCallback(500, getNextPageData)
+    wrapperCallback(500, getNextPageData),
   );
 
   useEffect(() => {
@@ -81,6 +80,23 @@ function Scroll(props) {
       });
     };
   }
+  const pullupTips = (
+    <div className="pullup-tips">
+      {!isPullUpLoad && isLoadingMore ? (
+        <div className="before-trigger">
+          <span className="pullup-txt">Pull up and load more</span>
+        </div>
+      ) : (
+        isPullUpLoad &&
+        isLoadingMore && (
+          <div className="after-trigger">
+            <span className="pullup-txt">Loading...</span>
+          </div>
+        )
+      )}
+      <div style={useToggleDisplay(!isLoadingMore)}>我也是有底线的</div>
+    </div>
+  );
   if (direction === "y" && pullUpLoad && !pulldownRefresh) {
     return (
       <div
@@ -90,21 +106,12 @@ function Scroll(props) {
       >
         <div className="pulldown-scroller">
           <div className="pulldown-list">{props.children}</div>
-          <div className="pullup-tips">
-            {!isPullUpLoad && isLoadingMore ? (
-              <div className="before-trigger">
-                <span className="pullup-txt">Pull up and load more</span>
-              </div>
-            ) : (
-              <div className="after-trigger">
-                <span className="pullup-txt">Loading...</span>
-              </div>
-            )}
-          </div>
+          {pullupTips}
         </div>
       </div>
     );
   }
+  
   if (direction === "y" && pulldownRefresh && !pullUpLoad) {
     const ele = (
       <div
@@ -154,21 +161,7 @@ function Scroll(props) {
             </div>
           </div>
           <div className="pulldown-list">{props.children}</div>
-          <div className="pullup-tips">
-            {!isPullUpLoad && isLoadingMore ? (
-              <div className="before-trigger">
-                <span className="pullup-txt">Pull up and load more</span>
-              </div>
-            ) : (
-              isPullUpLoad &&
-              isLoadingMore && (
-                <div className="after-trigger">
-                  <span className="pullup-txt">Loading...</span>
-                </div>
-              )
-            )}
-            <div style={useToggleDisplay(!isLoadingMore)}>我也是有底线的</div>
-          </div>
+          {pullupTips}
         </div>
       </div>
     );

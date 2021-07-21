@@ -39,7 +39,8 @@ function DyTabs() {
     });
   }
   function onChange(newVal) {
-    type.current = dyNavList[newVal].shortName;
+    console.log(dyNavList[newVal]);
+    // type.current = dyNavList[newVal].shortName;
   }
   // 计算scroll 组件根wrapper的高度, 好达到滚动的高度
   function computeRootHeight(calcHeight) {
@@ -85,9 +86,6 @@ function DyTabs() {
       </Scroll>
     );
   };
-  // function renderTabsContent() {
-  //   return dyNavList.map(renderItem);
-  // }
   return (
     <div className="HeaderTabsWrapper">
       <ScrollableTabsButtonAuto

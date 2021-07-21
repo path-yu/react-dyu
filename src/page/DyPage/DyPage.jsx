@@ -4,7 +4,6 @@ import DyCategory from "@/components/dypage/DyCategory";
 import LiveRoomList from "@/components/dypage/LiveRoomList";
 import ScrollableTabsButtonAuto from "@/components/ScrollableTabsButtonAuto/ScrollableTabsButtonAuto";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useKeepAliveEffect } from "react-keep-alive";
 import http from "../../http";
 import { getDOMSize, getWindowSize } from "../../utils/index";
 const liveRoomRefMap = {};
@@ -29,23 +28,8 @@ function DyTabs() {
       getNavListData();
     }
   }, [ref]);
-  useEffect(() => {
-    return () => {
-      console.log("dist");
-    };
-  });
-  useKeepAliveEffect(() => {
-   const list = document.querySelectorAll(".liveRoomItem");
-   console.log(list);
-   list.forEach((node) => {
-     node.addEventListener("click", () => {
-       console.log("red");
-     });
-   });
-    return () => {
-      console.log("unmounted");
-    };
-  });
+  
+ 
   function getNavListData() {
     http("/cateList").then((res) => {
       setDyNavList((state) => state.concat(res.data));

@@ -1,0 +1,105 @@
+.BookNavBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 54px;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    background: linear-gradient(to right, #4fba46, #82c542);
+
+    .searchBack {
+        display: flex;
+        align-items: center;
+        color: white;
+    }
+
+    .bookSearch {
+        display: flex;
+        align-items: center;
+        width: 200px;
+        height: 30px;
+        margin-left: 10px;
+        background-color: #fff;
+        border-radius: 20px;
+        padding-left: 5px;
+        overflow: hidden;
+
+        input {
+            border: none;
+        }
+
+        span {
+            margin-left: 25px;
+            color: #7c7c7c;
+            font-size: 10px;
+        }
+    }
+
+    .bookSearchBtn {
+        width: 60px;
+        line-height: 30px;
+        color: white;
+        font-size: 15px;
+        text-align: center;
+        background-color: #39b549;
+        border-radius: 15px;
+        margin-left: 10px;
+    }
+}
+
+// 图片导航栏样式
+.bookListnav {
+    .am-tabs-default-bar-underline {
+        border-color: #39b549;
+    }
+
+    .am-tabs-default-bar-tab-active {
+        color: #39b549;
+    }
+}
+
+// 图书列表样式
+.BookList {
+    padding: 10px;
+    background-color: #f4f4f4;
+
+    >div:first-child {
+        margin-top: 0;
+    }
+
+    >div {
+        display: flex;
+        margin-top: 10px;
+
+        .picLeft {
+            margin-right: 15px;
+            height: 140px;
+
+            img {
+                width: 120px;
+                height: 140px;
+            }
+        }
+
+        .bookInfo {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            color: #8f8f8f;
+
+            h5 {
+                font-size: 17px;
+                color: #303030;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+    }
+}
+
+.BookSearchPageNavBar {
+    position: sticky;
+    top: 0;
+    z-index: 22;
+}

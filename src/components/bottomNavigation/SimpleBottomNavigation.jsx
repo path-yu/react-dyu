@@ -14,8 +14,9 @@ const useStyles = makeStyles({
 
 export default function SimpleBottomNavigation(props) {
   const classes = useStyles();
-  const { onPress, tabBarList } = props;
-  const [value, setValue] = React.useState(0);
+  const { onPress, tabBarList,current } = props;
+  console.log(current);
+  const [value, setValue] = React.useState(current);
 
   function renderBottomNavigationAction(){
       return tabBarList && tabBarList.map((item) => {
