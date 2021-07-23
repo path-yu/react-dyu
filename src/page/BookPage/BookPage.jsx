@@ -6,7 +6,6 @@ import bookCateList from "@/data/bookcategort.json";
 import { getDOMSize, getWindowSize } from "@/utils";
 import React, { useCallback, useEffect, useRef } from "react";
 import "./bookPage.scss";
-console.log(bookCateList);
 export default function BookPage() {
   const BookListRef = useRef(null);
   const id = useRef(bookCateList.list[0].id);
@@ -27,7 +26,6 @@ export default function BookPage() {
 
   function onChange(index) {
     id.current = bookCateList.list[index].id;
-    console.log(bookCateList);
   }
   const renderItem = (item) => {
     return (

@@ -98,7 +98,9 @@ function BookList(props, ref) {
 
   const toBookDetailPage = (params) => {
     history.push({
-      pathname: "/bookDetail/" + params,
+      pathname: "/bookDetail/" + params.id,
+      isOpenNewPage:true,
+      state:params
     });
   };
   function RenderBookList() {

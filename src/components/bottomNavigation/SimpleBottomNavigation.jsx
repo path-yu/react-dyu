@@ -14,8 +14,7 @@ const useStyles = makeStyles({
 
 export default function SimpleBottomNavigation(props) {
   const classes = useStyles();
-  const { onPress, tabBarList,current } = props;
-  console.log(current);
+  const { onPress, tabBarList,current,hidden } = props;
   const [value, setValue] = React.useState(current);
 
   function renderBottomNavigationAction(){
@@ -32,6 +31,7 @@ export default function SimpleBottomNavigation(props) {
   return (
     <BottomNavigation
       value={value}
+      style={{ display: hidden ? "flex" : "none" }}
       onChange={(event, newValue) => {
         setValue(newValue);
         onPress && onPress(newValue);
@@ -39,7 +39,7 @@ export default function SimpleBottomNavigation(props) {
       showLabels
       className={classes.root}
     >
-     {renderBottomNavigationAction()}
+      {renderBottomNavigationAction()}
     </BottomNavigation>
   );
 }

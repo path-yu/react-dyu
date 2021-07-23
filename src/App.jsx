@@ -4,10 +4,11 @@ import {
   HomeSharp,
   MenuBookSharp
 } from "@material-ui/icons";
-import React, { useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { KeepAlive } from "react-keep-alive";
-import { Redirect, Route, Switch, useHistory } from "react-router-dom";
+import { Redirect, Route, useHistory } from "react-router-dom";
 import "./App.css";
+import AnimatedSwitch from "./common/AnimatedSwitch";
 import Layout from "./components/Layout";
 import routes from "./Route";
 
@@ -34,67 +35,72 @@ function App() {
   ];
   const history = useHistory();
   const current = useRef(1);
-  const currentUrl = useMemo(() => (tabBarDataList[current.current].url),[current]);
-  const style = {
-    position: "fixed",
-    width: "100vw",
-    bottom: 0,
-  };
+  const [hidden, setHidden] = useState(true);
+
+  const currentUrl = useMemo(
+    () => tabBarDataList[current.current].url,
+    [current]
+  );
 
   useEffect(() => {
     history.listen((location, action) => {
-      switch (location.pathname) {
-        case "/":
-          document.title = "首页";
-          break;
-        case "/book":
-          document.title = "图书馆";
-          break;
-        case "/user":
-          document.title = "个人中心";
-          break;
-        default:
-          document.title = "欢迎来到react项目";
-      }
+     if (location.isOpenNewPage){
+       setHidden(false);
+     }else{
+       setHidden(true)
+     }
+       switch (location.pathname) {
+         case "/":
+           document.title = "首页";
+           break;
+         case "/book":
+           document.title = "图书馆";
+           break;
+         case "/user":
+           document.title = "个人中心";
+           break;
+         default:
+           document.title = "欢迎来到react项目";
+       }
     });
-  }, []);
-  useLayoutEffect(() => {
-    
-  })
+  },[]);
+
   function handleOnPress(index) {
     history.push(tabBarDataList[index].url);
   }
 
-  function RenderRoute(routes,RedirectUrl) {
+  function RenderRoute(routes, RedirectUrl) {
     return (
       <>
         <Redirect to={RedirectUrl}></Redirect>
-        <Switch>
-          {routes.map((item, index) => {
-            let Component = item.component;
+        {routes.map((item, index) => {
+          let Component = item.component;
 
-            if (item.isNeedKeepAlive) {
-              return (
+          if (item.isNeedKeepAlive) {
+            return (
+              <Route
+                render={() => (
+                  <KeepAlive name={item.path}>
+                    <Component></Component>
+                  </KeepAlive>
+                )}
+                exact={item.exact}
+                path={item.path}
+                key={index}
+              ></Route>
+            );
+          } else {
+            return (
+              <AnimatedSwitch key={index}>
                 <Route
-                  render={() => (
-                    <KeepAlive name={item.path}>
-                      <Component></Component>
-                    </KeepAlive>
-                  )}
                   exact={item.exact}
+                  component={Component}
                   path={item.path}
-                  key={index}
                 ></Route>
-              );
-            } else {
-              return (
-                <Route exact={item.exact} path={item.path} key={index}>
-                  <Component></Component>
-                </Route>
-              );
-            }
-          })}
-        </Switch>
+              </AnimatedSwitch>
+            );
+          }
+        })}
       </>
     );
   }
@@ -103,10 +109,10 @@ function App() {
       {RenderRoute(routes, currentUrl)}
       {/* <DyPage></DyPage> */}
       <SimpleBottomNavigation
-        style={style}
         tabBarList={tabBarDataList}
         onPress={handleOnPress}
         current={current.current}
+        hidden={hidden}
       ></SimpleBottomNavigation>
     </Layout>
   );
