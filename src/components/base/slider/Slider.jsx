@@ -9,7 +9,6 @@ import useSlider from "./use_slider";
   const { currentPageIndex, slider,computedClassName } = useSlider(rootRef);
 
   const { sliders } = props;
-
   const renderItemImg = (item,index) => {
     return (
       <div key={index} className="slider-page" >

@@ -1,11 +1,12 @@
 import useLoading from "@/common/useLoading";
 import Loading from "@/components/base/loading/loading";
 import Slider from "@/components/base/slider/Slider";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import http from "../../../http";
 function DyBanner() {
   const [bannerList, setBannerList] = useState([]);
-  const res = useLoading()
+  const res = useLoading();
+  const isMounted = useRef(false);
   function getDyBannerData() {
     http("/banner").then((res) => {
       setBannerList(res.data.imgPreView);
@@ -15,6 +16,7 @@ function DyBanner() {
     if (bannerList.length === 0) {
       getDyBannerData();
     }
+   
   },[]);
   if (bannerList.length !== 0) {
     return (

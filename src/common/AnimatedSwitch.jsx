@@ -4,7 +4,10 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "./animateSwitch.css";
-
+const ANIMATION_MAP = {
+  PUSH: "fade",
+  POP: "refade",
+};
 const AnimatedSwitch = (props) => {
   const { children } = props;
   return (
@@ -14,7 +17,7 @@ const AnimatedSwitch = (props) => {
           <CSSTransition
             key={location.key}
             classNames={props.type || "slide"}
-            timeout={props.duration || 2000}
+            timeout={props.duration || 300}
           >
             <Switch location={location}>{children}</Switch>
           </CSSTransition>

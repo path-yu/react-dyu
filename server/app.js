@@ -8,8 +8,8 @@ const axiosInstance = axios.create({
   baseURL: 'https://m.douyu.com/api'
 })
 const requestBookInstance = axios.create({
-  baseURL: ' http://47.106.243.172:8888/book'
-})
+  baseURL: ' http://47.106.243.172:8888'
+});
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -81,13 +81,14 @@ app.get('/api/book/searchByPage', async (req, res) => {
     curr = 1,
       limit = 20,
       catId = 1,
+      keyword,
   } = req.query;
-  console.log(req.query);
-  const response = await requestBookInstance('/searchByPage', {
+  const response = await requestBookInstance('/book/searchByPage', {
     params: {
       curr,
       limit,
       catId,
+      keyword,
       sort: 'last_index_update_time'
     }
   });
@@ -97,6 +98,19 @@ app.get('/api/book/searchByPage', async (req, res) => {
     return item;
   })
   res.json(response.data);
+});
+app.get('/api/queryNewIndexList', async (req, res) => {
+  const {bookId} = req.query;
+  console.log(req.query);
+  if(!bookId){
+    res.json({data:null,message:'请输入id'})
+  };
+  const response = await requestBookInstance('/book/queryNewIndexList', {
+    params: {
+      bookId
+    }
+  });
+  res.json(response.data)
 })
 app.listen(3001, () => {
   console.log('server start at 3001 port');

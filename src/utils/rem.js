@@ -14,6 +14,5 @@ function setRem () {
 setRem()
 // 改变窗口大小时重新设置 rem
 window.onresize = function () {
-  console.log("我执行了")
   setRem()
 }

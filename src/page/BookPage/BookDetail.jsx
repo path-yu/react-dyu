@@ -11,7 +11,7 @@ export default function BookDetail(props) {
     console.log(state);
   }, []);
   return (
-    <div className="BookDetail bg-white h-100">
+    <div className="BookDetail bg-white" style={{height:'100vh'}}>
       <ButtonAppBar title={state?.bookName}></ButtonAppBar>
       <div className=" p-2 overflow-scroll" style={{ height: "82vh" }}>
         <div className="flex">

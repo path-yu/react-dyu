@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function UserPage() {
     return (
-        <div>
+        <div className="ddd">
             usePage
         </div>
     )

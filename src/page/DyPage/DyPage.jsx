@@ -13,9 +13,7 @@ function DyTabs() {
   ]);
   const ref = useRef();
   const type = useRef("tj");
-
   const requestData = useCallback(() => {
-    console.log(ref.current[type.current]);
     return ref.current[type.current].getLiveListData;
   }, [ref]);
 
@@ -25,9 +23,11 @@ function DyTabs() {
 
   useEffect(() => {
     if (dyNavList.length === 1) {
-      getNavListData();
+        getNavListData();
     }
-  }, [ref]);
+    return () => {
+    }
+  });
   
  
   function getNavListData() {

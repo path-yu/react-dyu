@@ -2,12 +2,20 @@ import { Icon } from "antd-mobile";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 export default function BookNavBar(props) {
-  const { isNeedBack=true, onChange, onSearch, placeHolder='搜索' } = props;
+  const { isNeedBack = true, onChange, onSearch, placeHolder = "搜索" } = props;
 
   const history = useHistory();
   const [val, setVal] = useState("");
 
-  const toBookSearchPage = () => history.push("/booksearch");
+  const toBookSearchPage = () => {
+    if(!isNeedBack){
+       history.push({
+         pathname: "booksearch",
+         isOpenNewPage: true,
+       });
+    }
+   
+  };
   const toBack = () => history.goBack();
 
   function handleChange(e) {
@@ -30,17 +38,14 @@ export default function BookNavBar(props) {
       ) : (
         ""
       )}
-      <div
-        className="bookSearch"
-        onClick={toBookSearchPage}
-      >
+      <div className="bookSearch" onClick={toBookSearchPage}>
         {isNeedBack ? "" : <Icon type="search" size="xxs"></Icon>}
         <span>
           {placeHolder ? (
             <input
               type="text"
               value={val}
-              placeholder="灵异"
+              placeholder={placeHolder}
               onChange={handleChange}
             />
           ) : (

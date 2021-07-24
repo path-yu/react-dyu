@@ -5,13 +5,10 @@ import {
   MenuBookSharp
 } from "@material-ui/icons";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { KeepAlive } from "react-keep-alive";
-import { Redirect, Route, useHistory } from "react-router-dom";
+import { Switch, useHistory } from "react-router-dom";
 import "./App.css";
-import AnimatedSwitch from "./common/AnimatedSwitch";
 import Layout from "./components/Layout";
-import routes from "./Route";
-
+import Routes from "./Route";
 function App() {
   const tabBarDataList = [
     {
@@ -34,7 +31,7 @@ function App() {
     },
   ];
   const history = useHistory();
-  const current = useRef(1);
+  const current = useRef(0);
   const [hidden, setHidden] = useState(true);
 
   const currentUrl = useMemo(
@@ -68,46 +65,12 @@ function App() {
   function handleOnPress(index) {
     history.push(tabBarDataList[index].url);
   }
-
-  function RenderRoute(routes, RedirectUrl) {
-    return (
-      <>
-        <Redirect to={RedirectUrl}></Redirect>
-        {routes.map((item, index) => {
-          let Component = item.component;
-
-          if (item.isNeedKeepAlive) {
-            return (
-              <Route
-                render={() => (
-                  <KeepAlive name={item.path}>
-                    <Component></Component>
-                  </KeepAlive>
-                )}
-                exact={item.exact}
-                path={item.path}
-                key={index}
-              ></Route>
-            );
-          } else {
-            return (
-              <AnimatedSwitch key={index}>
-                <Route
-                  exact={item.exact}
-                  component={Component}
-                  path={item.path}
-                ></Route>
-              </AnimatedSwitch>
-            );
-          }
-        })}
-      </>
-    );
-  }
+  
   return (
     <Layout className="App">
-      {RenderRoute(routes, currentUrl)}
-      {/* <DyPage></DyPage> */}
+      <Switch>
+        <Routes></Routes>
+      </Switch>
       <SimpleBottomNavigation
         tabBarList={tabBarDataList}
         onPress={handleOnPress}

@@ -23,10 +23,12 @@ export default function ReadMore(props) {
    
     return style;
   }, [height, opacity]);
+  const top = rotate === '0deg' ? '-1.38888889rem' : '-0.55555556rem';
+
   const backgroundStyle =
     rotate === "0deg"
       ? "linear-gradient(-180deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 80%)"
-      : "#fff";
+      : "transparent";
    const isShowToggle = richContentHeight.current >= maxHeight ? true : false;
   useLayoutEffect(() => {
     const richContentOffsetHeight = richContentHeight.current =  richContainerRef.current.offsetHeight;
@@ -62,8 +64,8 @@ export default function ReadMore(props) {
         isShowToggle &&  <div
           className="relative text-blue-500 text-center flex justify-center items-end "
           style={{
-            height: "50px",
-            top: "-40px",
+            height: "1.38888889rem",
+            top: top,
             background: backgroundStyle,
           }}
         >
