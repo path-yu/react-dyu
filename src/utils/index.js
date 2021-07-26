@@ -45,3 +45,8 @@ export function addUnit(value){
     return isNumeric(value) ? `${value}px` : String(value);
 }
 
+export function remToPx(rem){
+    const htmlSize = parseFloat(document.documentElement.style.fontSize);
+    rem = typeof rem === 'string' ? parseFloat(rem) : rem;
+    return htmlSize * rem;
+}

@@ -1,4 +1,4 @@
-import 'antd-mobile/dist/antd-mobile.css';
+import "antd-mobile/dist/antd-mobile.css";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-keep-alive";
@@ -8,12 +8,10 @@ import './common/css/reset.css';
 import './components/dypage/common.scss';
 import './public/index.css';
 import './utils/rem';
-
-
 ReactDOM.render(
   <Router>
     <Provider>
-      <App />
+      <App  />
     </Provider>
   </Router>,
   document.getElementById("root")

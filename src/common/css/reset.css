@@ -192,6 +192,8 @@ select {
 .MuiBox-root {
     padding: 0 !important;
 }
-.MuiSvgIcon-root{
-    font-size: 28px !important;
+.am-toast-text{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }

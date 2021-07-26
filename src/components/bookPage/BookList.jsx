@@ -9,7 +9,8 @@ import React, {
 } from "react";
 import { useHistory } from "react-router-dom";
 function BookList(props, ref) {
-  const id = props.id;
+  const id = props.id || '1';
+  const { isShowBookList = true } = props;
   const limit = 20;
   const page = useRef(1);
   const maxPage = useRef(2);
@@ -23,7 +24,7 @@ function BookList(props, ref) {
     props
   );
   useEffect(() => {
-    if (!bookListData.length) {
+    if (!bookListData.length && isShowBookList === true) {
       getBookListData();
     }
   }, []);
@@ -35,18 +36,21 @@ function BookList(props, ref) {
       res[id] = {
         getNextPageData,
         props,
+        getBookListData,
       };
       return Object.assign(res, ref.current);
     },
     []
   );
-  function getBookListData() {
+  function getBookListData(keyword) {
+    console.log(keyword);
     return http("/book/searchByPage", {
       params: {
         catId: id,
         curr: page.current,
         sort: "last_index_update_time",
         limit,
+        keyword,
       },
     })
       .then(
@@ -56,6 +60,7 @@ function BookList(props, ref) {
           if (!list.length) {
             return setEmpty(true);
           }
+          setEmpty(false);
           setBookListData(list);
         },
         (err) => {
@@ -125,7 +130,7 @@ function BookList(props, ref) {
       </div>
     );
   }
-  return <RenderElement />;
+  return isShowBookList ?  <RenderElement />  : <div></div>
 }
 
 export default forwardRef(BookList);

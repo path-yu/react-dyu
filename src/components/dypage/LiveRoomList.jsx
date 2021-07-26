@@ -76,7 +76,7 @@ function LiveRoomList(props, ref) {
     }
     return http("/liveRoomList", {
       params: {
-        type,
+        type:type !== 'tj' ? type :'',
         page: page.current + 1,
       },
     })

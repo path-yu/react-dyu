@@ -7,6 +7,7 @@ import BookPage from "./page/BookPage/BookPage";
 import BookSearchPage from "./page/BookPage/BookSearchPage";
 import DyPage from "./page/DyPage/DyPage";
 import UserPage from "./page/UserPage/UserPage";
+import appState from "./store/index";
 export default function Routes() {
   return (
     <>
@@ -24,7 +25,7 @@ export default function Routes() {
         <Route path="/bookDetail/:id" exact component={BookDetail}></Route>
       </AnimatedSwitch>
       <AnimatedSwitch>
-        <Route path="/bookSearch" exact component={BookSearchPage}></Route>
+        <Route path="/bookSearch" exact render={() => <BookSearchPage appState={appState} />}></Route>
       </AnimatedSwitch>
       <Route path="/user" exact>
         <KeepAlive name="/user">
