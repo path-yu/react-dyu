@@ -1,7 +1,7 @@
 import { appBarIconStyle } from "@/common/material-icon-style";
 import CustomizedButtons from "@/components/base/Button/Button";
+import ButtonAppBar from "@/components/base/ButtonAppBar/ButtonAppBar";
 import ReadMore from "@/components/base/readMore/ReadMore";
-import ButtonAppBar from "@/components/bookPage/ButtonAppBar";
 import { ChevronRight } from '@material-ui/icons';
 import React, { useEffect } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";

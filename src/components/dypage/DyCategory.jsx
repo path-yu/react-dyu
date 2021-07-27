@@ -1,11 +1,14 @@
 import http from '@/http';
-import React, { useEffect, useState } from "react";
+import React, {
+  forwardRef,
+  useEffect, useImperativeHandle, useState
+} from "react";
 import { useHistory } from "react-router-dom";
 import useEmpty from "../../common/useEmpty";
 import useLoading from "../../common/useLoading";
 import { mapRender } from "../../utils";
 import Scroll from "../base/scroll/scroll";
-function DyCategory(props) {
+function DyCategory(props,ref) {
   const [categoryList, setCategoryList] = useState([]);
   const { image, description, handleError } = useEmpty();
   const { push } = useHistory();
@@ -18,6 +21,11 @@ function DyCategory(props) {
   useEffect(() => {
     getCategoryData();
   }, []);
+  useImperativeHandle(ref,() => {
+    return {
+      getCategoryData,
+    };
+  })
   async function getCategoryData() {
     return http("/getColumnList")
       .then((res) => {
@@ -62,4 +70,4 @@ function DyCategory(props) {
   return <RenderElement />;
 }
 
-export default DyCategory;
+export default forwardRef(DyCategory);

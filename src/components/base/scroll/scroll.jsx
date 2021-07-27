@@ -26,13 +26,16 @@ function Scroll(props) {
   let scrollRef = useRef(null);
   const [rootHeight, setRootHeight] = useState("100vh");
   const [rootWidth, setRootWidth] = useState("100vw");
+  // if(pulldownRequestData){
+  //   console.log(pulldownRequestData());
+  // }
   const { isPullingDown, beforePullDown, pullingDownHandler } = usePullDown(
     scrollRef,
-    wrapperCallback(500, pulldownRequestData)
+    wrapperCallback(200, pulldownRequestData)
   );
   const { isPullUpLoad, pullingUpHandler, isLoadingMore } = usePullUp(
     scrollRef,
-    wrapperCallback(500, getNextPageData),
+    wrapperCallback(200, getNextPageData)
   );
 
   useEffect(() => {
@@ -74,8 +77,14 @@ function Scroll(props) {
       return new Promise((resolve) => {
         clearTimeout(timer);
         timer = setTimeout(async () => {
-          const res = await requestDataCallback()();
-          resolve(res);
+          const fn = requestDataCallback();
+          if (Array.isArray(fn)) {
+            fn.forEach((f) => f());
+            resolve(true);
+          } else {
+            console.log(fn);
+            resolve(await fn());
+          }
         }, delay);
       });
     };
@@ -111,7 +120,7 @@ function Scroll(props) {
       </div>
     );
   }
-  
+
   if (direction === "y" && pulldownRefresh && !pullUpLoad) {
     const ele = (
       <div

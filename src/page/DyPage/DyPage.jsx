@@ -11,17 +11,24 @@ function DyTabs() {
   const [dyNavList, setDyNavList] = useState([
     { tag_id: 999, tag_name: "推荐", cate_id: 998, shortName: "tj" },
   ]);
-  const ref = useRef();
+  const LiveRoomListRef = useRef();
+  const cateGoryRef = useRef(null);
   const type = useRef("tj");
   const requestData = useCallback(() => {
-    return ref.current[type.current].getLiveListData;
-  }, [ref]);
+    const liveRoomListRequestFn =
+      LiveRoomListRef.current[type.current].getLiveListData;;
+    if (cateGoryRef && type.current === 'tj'){
+      return [liveRoomListRequestFn, cateGoryRef.current.getCategoryData];
+    }
+      return liveRoomListRequestFn;
+  }, [LiveRoomListRef]);
 
   const getNextPageData = useCallback(() => {
-    return ref.current[type.current].getNextLiveListData;
-  }, [ref]);
+    return LiveRoomListRef.current[type.current].getNextLiveListData;
+  }, [LiveRoomListRef]);
 
   useEffect(() => {
+    console.log(cateGoryRef.current);
     if (dyNavList.length === 1) {
         getNavListData();
     }
@@ -51,13 +58,13 @@ function DyTabs() {
           {/* 轮播图 */}
           <DyBanner />
           {/*  分类列表 */}
-          <DyCategory />
+          <DyCategory ref={cateGoryRef} />
           {/* 推荐直播列表 */}
           <LiveRoomList
             tagId={item.tag_id}
             cateId={item.cate_id}
             type={item.shortName}
-            ref={ref}
+            ref={LiveRoomListRef}
           />
         </div>
       ) : (
@@ -65,7 +72,7 @@ function DyTabs() {
           tagId={item.tag_id}
           cateId={item.cate_id}
           type={item.shortName}
-          ref={ref}
+          ref={LiveRoomListRef}
         />
       );
     return (
