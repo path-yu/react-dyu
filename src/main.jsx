@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-keep-alive";
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
+import './assets/icon.css';
 import './common/css/reset.css';
 import './components/dypage/common.scss';
 import './public/index.css';

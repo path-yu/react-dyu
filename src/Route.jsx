@@ -6,6 +6,7 @@ import AnimatedSwitch from "./common/AnimatedSwitch";
 import BookPage from "./page/BookPage/BookPage";
 import BookSearchPage from "./page/BookPage/BookSearchPage";
 import DyPage from "./page/DyPage/DyPage";
+import LiveRoom from "./page/DyPage/LiveRoom";
 import LiveRoomListPage from "./page/DyPage/LiveRoomListPage";
 import UserPage from "./page/UserPage/UserPage";
 import appState from "./store/index";
@@ -37,8 +38,11 @@ export default function Routes() {
           <UserPage></UserPage>
         </KeepAlive>
       </Route>
-      <Route path="/liveRoomList">
+      <Route path="/liveRoomList" exact>
         <LiveRoomListPage></LiveRoomListPage>
+      </Route>
+      <Route path="/liveRoom" exact>
+        <LiveRoom></LiveRoom>
       </Route>
     </>
   );

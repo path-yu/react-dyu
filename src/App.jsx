@@ -44,8 +44,8 @@ function App() {
     if (index) {
       ref.current && ref.current.changeValue(index);
     }
-    history.listen((location, action) => {
-      if (location.isOpenNewPage) {
+   const unListen =  history.listen((location, action) => {
+      if (location.isOpenNewPage || location.state?.isOpenNewPage) {
         setHidden(false);
       } else {
         setHidden(true);
@@ -64,6 +64,9 @@ function App() {
           document.title = "欢迎来到react项目";
       }
     });
+    return () => {
+      unListen();
+    }
   }, []);
 
   function handleOnPress(index) {

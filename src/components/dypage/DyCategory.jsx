@@ -6,12 +6,12 @@ import React, {
 import { useHistory } from "react-router-dom";
 import useEmpty from "../../common/useEmpty";
 import useLoading from "../../common/useLoading";
-import { mapRender } from "../../utils";
+import { mapRender, shuffle } from "../../utils";
 import Scroll from "../base/scroll/scroll";
 function DyCategory(props,ref) {
   const [categoryList, setCategoryList] = useState([]);
   const { image, description, handleError } = useEmpty();
-  const { push } = useHistory();
+  const history = useHistory();
 
   let { RenderElement, setLoading, setIsError, setEmpty,loading } = useLoading(
     true,
@@ -27,30 +27,34 @@ function DyCategory(props,ref) {
     };
   })
   async function getCategoryData() {
+    setIsError(false);
+    setLoading(true);
     return http("/getColumnList")
       .then((res) => {
         setLoading(false);
         if(!res.data.length){
           return setEmpty(true);
         }
-        if (!categoryList.length) {
-          setCategoryList(res.data);
-        }
+       setCategoryList(shuffle(res.data));
       })
       .catch((err) => {
         setLoading(false);
-        setIsError(err);
+        setIsError(true);
       });
   }
 
-  function toLiveRoomList(name, id) {
-    push(`/liveRoomList?cate_name=${name}&cate_id=${id}`);
+  function toLiveRoomList(params) {
+    
+    history.push(
+      `/liveRoomList?cate_name=${params.cate2Name}&shortName=${params.shortName}`,
+      { isOpenNewPage: true }
+    );
   }
   const categoryItem = (item, index) => {
     return (
       <div
         key={index}
-        onClick={() => toLiveRoomList(item.cate_name, item.cate_id)}
+        onClick={() => toLiveRoomList(item)}
       >
         <img src={item.pic} alt="" />
         <span>{item.cate2Name} </span>

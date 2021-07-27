@@ -11,7 +11,6 @@ export default function useSlider(wrapperRef) {
         return currentPageIndex === index ? "active dot" : "dot"
     }
     useEffect(() => {
-        console.log(wrapperRef.current);
         const sliderVal = new BScroll(wrapperRef.current, {
             click: true,
             scrollX: true,

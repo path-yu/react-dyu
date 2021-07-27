@@ -28,7 +28,6 @@ function DyTabs() {
   }, [LiveRoomListRef]);
 
   useEffect(() => {
-    console.log(cateGoryRef.current);
     if (dyNavList.length === 1) {
         getNavListData();
     }

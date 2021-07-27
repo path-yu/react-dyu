@@ -130,7 +130,7 @@ function BookList(props, ref) {
       </div>
     );
   }
-  return isShowBookList ?  <RenderElement />  : <div></div>
+  return isShowBookList ?  <RenderElement />  : <></>
 }
 
 export default forwardRef(BookList);

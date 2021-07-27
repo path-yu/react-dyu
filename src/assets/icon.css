@@ -1,0 +1,503 @@
+.c-chat .dm-item i.level {
+    display: inline-block;
+    height: 0.58333333rem;
+    width: 1.16666667rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    transform: scale(.8);
+    transform-origin: left top
+}
+.c-chat .dm-item span {
+    font-size: 0.38888889rem;
+    color: #999
+}
+.c-chat .dm-item {
+    margin-bottom: 0.11111111rem;
+    padding: 0 0.27777778rem;
+    white-space: normal;
+    line-height: 1.5;
+    font-size: 0.38888889rem;
+    color: #666;
+    word-wrap: break-word;
+    word-break: break-all
+}
+.c-chat .dm-item i.level.level-1 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV1_c8203fd.png)
+}
+
+.c-chat .dm-item i.level.level-2 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV2_88e210c.png)
+}
+
+.c-chat .dm-item i.level.level-3 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV3_20afea6.png)
+}
+
+.c-chat .dm-item i.level.level-4 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV4_88591e4.png)
+}
+
+.c-chat .dm-item i.level.level-5 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV5_c4f02f1.png)
+}
+
+.c-chat .dm-item i.level.level-6 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV6_159d2cb.png)
+}
+
+.c-chat .dm-item i.level.level-7 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV7_1225b85.png)
+}
+
+.c-chat .dm-item i.level.level-8 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV8_3aec5a7.png)
+}
+
+.c-chat .dm-item i.level.level-9 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV9_ee1173a.png)
+}
+
+.c-chat .dm-item i.level.level-10 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV10_99d85ec.png)
+}
+
+.c-chat .dm-item i.level.level-11 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV11_a53070d.png)
+}
+
+.c-chat .dm-item i.level.level-12 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV12_ba00edf.png)
+}
+
+.c-chat .dm-item i.level.level-13 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV13_8bc8bf9.png)
+}
+
+.c-chat .dm-item i.level.level-14 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV14_4dcfe92.png)
+}
+
+.c-chat .dm-item i.level.level-15 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV15_6f7531a.png)
+}
+
+.c-chat .dm-item i.level.level-16 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV16_06571b7.png)
+}
+
+.c-chat .dm-item i.level.level-17 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV17_f7da6c1.png)
+}
+
+.c-chat .dm-item i.level.level-18 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV18_9b018fb.png)
+}
+
+.c-chat .dm-item i.level.level-19 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV19_3a3c448.png)
+}
+
+.c-chat .dm-item i.level.level-20 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV20_5ed4cbd.png)
+}
+
+.c-chat .dm-item i.level.level-21 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV21_90a68b0.png)
+}
+
+.c-chat .dm-item i.level.level-22 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV22_87d9537.png)
+}
+
+.c-chat .dm-item i.level.level-23 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV23_84a1be1.png)
+}
+
+.c-chat .dm-item i.level.level-24 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV24_0279fa6.png)
+}
+
+.c-chat .dm-item i.level.level-25 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV25_36ca926.png)
+}
+
+.c-chat .dm-item i.level.level-26 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV26_0058465.png)
+}
+
+.c-chat .dm-item i.level.level-27 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV27_efc617b.png)
+}
+
+.c-chat .dm-item i.level.level-28 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV28_889e343.png)
+}
+
+.c-chat .dm-item i.level.level-29 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV29_0d13ea0.png)
+}
+
+.c-chat .dm-item i.level.level-30 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV30_7fff4fe.png)
+}
+
+.c-chat .dm-item i.level.level-31 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV31_025e6ed.png)
+}
+
+.c-chat .dm-item i.level.level-32 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV32_936056e.png)
+}
+
+.c-chat .dm-item i.level.level-33 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV33_517842d.png)
+}
+
+.c-chat .dm-item i.level.level-34 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV34_c822950.png)
+}
+
+.c-chat .dm-item i.level.level-35 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV35_12b9718.png)
+}
+
+.c-chat .dm-item i.level.level-36 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV36_184ff99.png)
+}
+
+.c-chat .dm-item i.level.level-37 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV37_9a0eb9b.png)
+}
+
+.c-chat .dm-item i.level.level-38 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV38_adda5ed.png)
+}
+
+.c-chat .dm-item i.level.level-39 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV39_f67860a.png)
+}
+
+.c-chat .dm-item i.level.level-40 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV40_e255798.png)
+}
+
+.c-chat .dm-item i.level.level-41 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV41_fe16142.png)
+}
+
+.c-chat .dm-item i.level.level-42 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV42_650c274.png)
+}
+
+.c-chat .dm-item i.level.level-43 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV43_95b646e.png)
+}
+
+.c-chat .dm-item i.level.level-44 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV44_333299b.png)
+}
+
+.c-chat .dm-item i.level.level-45 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV45_3226eb2.png)
+}
+
+.c-chat .dm-item i.level.level-46 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV46_5d12bf6.png)
+}
+
+.c-chat .dm-item i.level.level-47 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV47_77ab8cc.png)
+}
+
+.c-chat .dm-item i.level.level-48 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV48_b02b2e1.png)
+}
+
+.c-chat .dm-item i.level.level-49 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV49_c9fd7b2.png)
+}
+
+.c-chat .dm-item i.level.level-50 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV50_84617bd.png)
+}
+
+.c-chat .dm-item i.level.level-51 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV51_cd0ff28.png)
+}
+
+.c-chat .dm-item i.level.level-52 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV52_a29e85b.png)
+}
+
+.c-chat .dm-item i.level.level-53 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV53_18decd8.png)
+}
+
+.c-chat .dm-item i.level.level-54 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV54_ca3f4b5.png)
+}
+
+.c-chat .dm-item i.level.level-55 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV55_1082550.png)
+}
+
+.c-chat .dm-item i.level.level-56 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV56_664a21d.png)
+}
+
+.c-chat .dm-item i.level.level-57 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV57_0c0aa5d.png)
+}
+
+.c-chat .dm-item i.level.level-58 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV58_92e47e2.png)
+}
+
+.c-chat .dm-item i.level.level-59 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV59_63ec391.png)
+}
+
+.c-chat .dm-item i.level.level-60 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV60_cdbf6f4.png)
+}
+
+.c-chat .dm-item i.level.level-61 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV61_1566274.png)
+}
+
+.c-chat .dm-item i.level.level-62 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV62_b680102.png)
+}
+
+.c-chat .dm-item i.level.level-63 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV63_e20e565.png)
+}
+
+.c-chat .dm-item i.level.level-64 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV64_e0b3f91.png)
+}
+
+.c-chat .dm-item i.level.level-65 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV65_ccdfc11.png)
+}
+
+.c-chat .dm-item i.level.level-66 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV66_b5eea94.png)
+}
+
+.c-chat .dm-item i.level.level-67 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV67_72aaaf5.png)
+}
+
+.c-chat .dm-item i.level.level-68 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV68_9dcc135.png)
+}
+
+.c-chat .dm-item i.level.level-69 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV69_01fc4da.png)
+}
+
+.c-chat .dm-item i.level.level-70 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV70_0d39a42.png)
+}
+
+.c-chat .dm-item i.level.level-71 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV71_1d19c5e.png)
+}
+
+.c-chat .dm-item i.level.level-72 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV72_bffca20.png)
+}
+
+.c-chat .dm-item i.level.level-73 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV73_3ff9974.png)
+}
+
+.c-chat .dm-item i.level.level-74 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV74_25d2894.png)
+}
+
+.c-chat .dm-item i.level.level-75 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV75_a30e431.png)
+}
+
+.c-chat .dm-item i.level.level-76 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV76_65791bc.png)
+}
+
+.c-chat .dm-item i.level.level-77 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV77_febe3ce.png)
+}
+
+.c-chat .dm-item i.level.level-78 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV78_5556fe5.png)
+}
+
+.c-chat .dm-item i.level.level-79 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV79_17eafc4.png)
+}
+
+.c-chat .dm-item i.level.level-80 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV80_c902d74.png)
+}
+
+.c-chat .dm-item i.level.level-81 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV81_b5628c1.png)
+}
+
+.c-chat .dm-item i.level.level-82 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV82_7ccf23e.png)
+}
+
+.c-chat .dm-item i.level.level-83 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV83_442b829.png)
+}
+
+.c-chat .dm-item i.level.level-84 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV84_1a55b73.png)
+}
+
+.c-chat .dm-item i.level.level-85 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV85_5031902.png)
+}
+
+.c-chat .dm-item i.level.level-86 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV86_63f8b94.png)
+}
+
+.c-chat .dm-item i.level.level-87 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV87_68aaf03.png)
+}
+
+.c-chat .dm-item i.level.level-88 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV88_de1a7e8.png)
+}
+
+.c-chat .dm-item i.level.level-89 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV89_b33d61e.png)
+}
+
+.c-chat .dm-item i.level.level-90 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV90_54cc2af.png)
+}
+
+.c-chat .dm-item i.level.level-91 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV91_b02fd50.png)
+}
+
+.c-chat .dm-item i.level.level-92 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV92_8ac34eb.png)
+}
+
+.c-chat .dm-item i.level.level-93 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV93_ad4b897.png)
+}
+
+.c-chat .dm-item i.level.level-94 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV94_cefb1e2.png)
+}
+
+.c-chat .dm-item i.level.level-95 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV95_a8077bc.png)
+}
+
+.c-chat .dm-item i.level.level-96 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV96_9bdff94.png)
+}
+
+.c-chat .dm-item i.level.level-97 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV97_85d096a.png)
+}
+
+.c-chat .dm-item i.level.level-98 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV98_ce4902f.png)
+}
+
+.c-chat .dm-item i.level.level-99 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV99_4ea26c1.png)
+}
+
+.c-chat .dm-item i.level.level-100 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV100_195c01f.png)
+}
+
+.c-chat .dm-item i.level.level-101 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV101_1dc896f.png)
+}
+
+.c-chat .dm-item i.level.level-102 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV102_3900c7f.png)
+}
+
+.c-chat .dm-item i.level.level-103 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV103_2fc51ce.png)
+}
+
+.c-chat .dm-item i.level.level-104 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV104_f37c4cc.png)
+}
+
+.c-chat .dm-item i.level.level-105 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV105_fa40833.png)
+}
+
+.c-chat .dm-item i.level.level-106 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV106_c711766.png)
+}
+
+.c-chat .dm-item i.level.level-107 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV107_8ab6db3.png)
+}
+
+.c-chat .dm-item i.level.level-108 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV108_b484005.png)
+}
+
+.c-chat .dm-item i.level.level-109 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV109_2facab4.png)
+}
+
+.c-chat .dm-item i.level.level-110 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV110_ef90c22.png)
+}
+
+.c-chat .dm-item i.level.level-111 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV111_74ad228.png)
+}
+
+.c-chat .dm-item i.level.level-112 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV112_4a33d48.png)
+}
+
+.c-chat .dm-item i.level.level-113 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV113_3d26539.png)
+}
+
+.c-chat .dm-item i.level.level-114 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV114_2e8bfb0.png)
+}
+
+.c-chat .dm-item i.level.level-115 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV115_c51a72d.png)
+}
+
+.c-chat .dm-item i.level.level-116 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV116_3110f97.png)
+}
+
+.c-chat .dm-item i.level.level-117 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV117_4be281e.png)
+}
+
+.c-chat .dm-item i.level.level-118 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV118_2dc286b.png)
+}
+
+.c-chat .dm-item i.level.level-119 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV119_e48ed82.png)
+}
+
+.c-chat .dm-item i.level.level-120 {
+    background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV120_4ce5209.png)
+}

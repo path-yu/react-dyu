@@ -6,7 +6,6 @@ export default function usePullUp(bscroll, requestData) {
     const [isLoadingMore,setIsLoadingMore] = useState(true);
     const preventPullUpLoad = useRef(false);
     async function pullingUpHandler(){
-        console.log(preventPullUpLoad.current);
         if (isLoadingMore === false) {
             bscroll.current.off("pullingUp", pullingUpHandler);
             return;

@@ -41,7 +41,7 @@ export default function ButtonAppBar(props) {
   const {goBack,push} = useHistory();  
   return (
     <div
-      className={classes.root}
+      className={classes.root+' ButtonAppBar'}
       style={{ background: "linear-gradient(to right, #4fba46, #82c542)" }}
     >
       <AppBar position="sticky" color="transparent">

@@ -79,11 +79,7 @@ export default function ScrollableTabsButtonAuto(props) {
     // 派发change事件
    onChange && onChange(newValue);
   };
-  useEffect(() => {
-    return () => {
-      console.log('destroy');
-    }
-  })
+  
   useEffect(() => {
     renderSign.current = Array(tabs.length).fill(false);
   }, [tabs]);

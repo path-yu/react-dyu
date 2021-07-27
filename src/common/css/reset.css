@@ -197,3 +197,16 @@ select {
     align-items: center;
     flex-direction: column;
 }
+.video-react .video-react-big-play-button {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.video-react-controls-enabled {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}

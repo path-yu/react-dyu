@@ -1,6 +1,5 @@
+import danmu from '@/data/danmu.json';
 import { isDef, isNumeric } from "./validate";
-
-
 export function getDOMSize(selector) {
     const ele = document.querySelector(selector);
     if (ele != null) {
@@ -49,4 +48,31 @@ export function remToPx(rem){
     const htmlSize = parseFloat(document.documentElement.style.fontSize);
     rem = typeof rem === 'string' ? parseFloat(rem) : rem;
     return htmlSize * rem;
+}
+export function urlSearchParse(url){
+    let res = [];
+    const searchParams = new URLSearchParams(url);
+    for(let [key,val] of searchParams){
+        res[key] = val;
+    }
+    return res;
+}
+// 生成指定范围随机数
+export function randomIndex(min,max){
+    return Math.floor(Math.random() * (max - min + 1) + min );
+}
+// 根据count来随机生成弹幕
+export function randomBarrage(count){
+    let index = 0;
+    let indexList = [];
+    const maxLen = danmu.length;
+    while(index < count){
+        index++;
+        indexList.push(randomIndex(0,maxLen));
+    }
+    if(count === 1) return danmu[indexList[0]];
+    return indexList.reduce((t,v) => {
+        t.push(danmu[v]);
+        return t;
+    },[])
 }

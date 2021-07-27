@@ -25,10 +25,7 @@ function Scroll(props) {
   const rootRef = useRef(null);
   let scrollRef = useRef(null);
   const [rootHeight, setRootHeight] = useState("100vh");
-  const [rootWidth, setRootWidth] = useState("100vw");
-  // if(pulldownRequestData){
-  //   console.log(pulldownRequestData());
-  // }
+
   const { isPullingDown, beforePullDown, pullingDownHandler } = usePullDown(
     scrollRef,
     wrapperCallback(200, pulldownRequestData)
@@ -82,7 +79,6 @@ function Scroll(props) {
             fn.forEach((f) => f());
             resolve(true);
           } else {
-            console.log(fn);
             resolve(await fn());
           }
         }, delay);
@@ -109,8 +105,8 @@ function Scroll(props) {
   if (direction === "y" && pullUpLoad && !pulldownRefresh) {
     return (
       <div
-        className=" rootRef pulldown-bswrapper"
-        style={{ height: rootHeight }}
+        className="rootRef pulldown-bswrapper"
+        style={{ height: rootHeight,overflow:'hidden' }}
         ref={rootRef}
       >
         <div className="pulldown-scroller">
@@ -125,7 +121,7 @@ function Scroll(props) {
     const ele = (
       <div
         className=" rootRef pulldown-bswrapper"
-        style={{ height: rootHeight }}
+        style={{ height: rootHeight, overflow: "hidden" }}
         ref={rootRef}
       >
         <div className="pulldown-scroller">
@@ -152,7 +148,7 @@ function Scroll(props) {
     return (
       <div
         className=" rootRef pulldown-bswrapper"
-        style={{ height: rootHeight }}
+        style={{ height: rootHeight, overflow: "hidden" }}
         ref={rootRef}
       >
         <div className="pulldown-scroller">

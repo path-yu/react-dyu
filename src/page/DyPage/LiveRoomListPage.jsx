@@ -1,11 +1,37 @@
-import ButtonAppBar from '@/components/base/ButtonAppBar/ButtonAppBar'
-import React from 'react'
-
+import ButtonAppBar from "@/components/base/ButtonAppBar/ButtonAppBar";
+import Scroll from "@/components/base/scroll/scroll";
+import LiveRoomList from "@/components/dypage/LiveRoomList";
+import { getDOMSize, getWindowSize, urlSearchParse } from "@/utils";
+import React, { useCallback, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 export default function LiveRoomListPage() {
-    return (
-        <div>
-            <ButtonAppBar title='单机热油'></ButtonAppBar>
-            <p>434</p>
-        </div>
-    )
+  const history = useHistory();
+  const liveRoomRef = useRef(null);
+  const { cate_name, shortName } = urlSearchParse(history.location.search);
+  
+  const getNextPageData = useCallback(() => {
+    return liveRoomRef.current[shortName].getNextLiveListData;
+  }, [liveRoomRef]);
+  useEffect(() => {
+    console.log(liveRoomRef.current);
+  });
+
+  function computedHeight() {
+    let appBarHeight = getDOMSize(".ButtonAppBar")[1];
+    return getWindowSize()[1] - appBarHeight + "px";
+  }
+
+  return (
+    <div>
+      <ButtonAppBar title={cate_name}></ButtonAppBar>
+      <Scroll
+        pullUpLoad={true}
+        getNextPageData={getNextPageData}
+        CalcHeight={computedHeight}
+      >
+        <LiveRoomList ref={liveRoomRef} type={shortName}></LiveRoomList>
+      </Scroll>
+      <div>434343</div>
+    </div>
+  );
 }

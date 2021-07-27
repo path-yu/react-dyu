@@ -59,10 +59,11 @@ function LiveRoomList(props, ref) {
             return setEmpty(true);
           }
           maxPage.current = res.pageCount;
-          setRoomList([...shuffle(res.data.list)]);
+          setRoomList(shuffle(res.data.list));
         },
         (err) => {
           setIsError(true);
+          setLoading(false);
         }
       )
       .catch((error) => {
@@ -76,7 +77,7 @@ function LiveRoomList(props, ref) {
     }
     return http("/liveRoomList", {
       params: {
-        type:type !== 'tj' ? type :'',
+        type: type !== "tj" ? type : "",
         page: page.current + 1,
       },
     })
@@ -99,9 +100,10 @@ function LiveRoomList(props, ref) {
         console.log(error);
       });
   }
-  const toLiveRoom = () => {
-    push("/liveroom");
-    console.log("434");
+  const toLiveRoom = (params) => {
+    push(`/liveRoom?id=${params.cate2Id}&roomName=${params.roomName}`, {
+      isOpenNewPage: true,
+    });
   };
   function RenderRoomList() {
     return (
@@ -111,7 +113,7 @@ function LiveRoomList(props, ref) {
             <div
               className="liveRoomItem"
               key={item.rid + index}
-              onClick={toLiveRoom}
+              onClick={() => toLiveRoom(item)}
             >
               {/* <img src={item.roomSrc} alt="" /> */}
               <Image
