@@ -6,12 +6,14 @@ const appState = observable({
 });
 
 export const addSearchHistory = (val) => {
-    action(() => {
+    action(() => { 
         // 判断是否已经存在了对应的搜索记录
         if (!appState.searchHistoryList.includes(val)) {
             appState.searchHistoryList.push(val);
-            save(SEARCH_KEY, [...appState.searchHistoryList])
+            save(SEARCH_KEY, [...appState.searchHistoryList]);
+            return true
         }
+        return false;
     })()
 };
 export const clearSearchHistory = () => {

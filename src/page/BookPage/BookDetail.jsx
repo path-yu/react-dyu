@@ -1,3 +1,4 @@
+import { appBarIconStyle } from "@/common/material-icon-style";
 import CustomizedButtons from "@/components/base/Button/Button";
 import ReadMore from "@/components/base/readMore/ReadMore";
 import ButtonAppBar from "@/components/bookPage/ButtonAppBar";
@@ -6,12 +7,13 @@ import React, { useEffect } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
 export default function BookDetail(props) {
   const { id } = useRouteMatch().params;
+  const IconStyle = appBarIconStyle();
   const { state } = useHistory().location;
   useEffect(() => {
     console.log(state);
   }, []);
   return (
-    <div className="BookDetail bg-white" style={{height:'100vh'}}>
+    <div className="BookDetail bg-white" style={{ height: "100vh" }}>
       <ButtonAppBar title={state?.bookName}></ButtonAppBar>
       <div className=" p-2 overflow-scroll" style={{ height: "82vh" }}>
         <div className="flex">
@@ -43,7 +45,7 @@ export default function BookDetail(props) {
             <div className="font-semibold text-cmd">最新</div>
             <div className="text-gray-400 truncate w-15">
               第5454张44444444444
-              <ChevronRight></ChevronRight>
+              <ChevronRight className={IconStyle.root}></ChevronRight>
             </div>
           </div>
 
@@ -51,7 +53,7 @@ export default function BookDetail(props) {
             <div className="font-semibold text-cmd">目录</div>
             <div className="text-gray-400">
               共1756张
-              <ChevronRight></ChevronRight>
+              <ChevronRight className={IconStyle.root}></ChevronRight>
             </div>
           </div>
         </div>

@@ -4,8 +4,9 @@ import { clearSearchHistory } from "@/store";
 import { getDOMSize, remToPx } from "@/utils";
 import { Delete } from "@material-ui/icons";
 import { observer } from "mobx-react";
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useCallback, useLayoutEffect, useRef } from "react";
 import useLongPress from "./useLongPress";
+
 function SearchHistoryList({
   appState,
   handleSearch,
@@ -13,55 +14,48 @@ function SearchHistoryList({
 }) {
   const IconStyle = iconStyle();
   const list = appState.searchHistoryList;
-  const [listStyle, setListStyle] = useState({});
   const listRef = useRef(null);
+  const spreadToggleRef = useRef(null);
   const spreadDistance = useRef(null);
   const listRawHeight = useRef("100%");
-  const [spreadText, setSpreadText] = useState("展开");
   const { start, move, end } = useLongPress(handleLongPress, 1000);
   const { showAlert, close } = useModal("删除", "确定删除全部浏览记录吗?");
-
-  const [isShowSpreadWidget, setIsShowSpreadWidget] = useState(false);
+  const getSpreadText = useCallback(() => {
+    return spreadToggleRef.current.textContent
+  }, [spreadToggleRef]);
   useLayoutEffect(() => {
-    if (!list.length || !listRef.current) return;
+    if (!list.length || !listRef.current || !spreadToggleRef.current) return;
     const itemHeight = getDOMSize(".searchHistoryItem")[1];
     const listHeight = (listRawHeight.current = listRef.current.clientHeight);
-    spreadDistance.current = itemHeight * 2 + remToPx(0.25)*2 ;
-    //可能会有5px的误差
-    if (listHeight - spreadDistance.current > 5) {
-      setListStyle({
-        height: spreadDistance.current + "px",
-        overflow: "hidden",
-      });
-      setIsShowSpreadWidget(true);
+    //可能会有3px的误差
+    spreadDistance.current = (itemHeight  + remToPx(0.25) ) * 2 + (3)
+    console.log(listHeight, spreadDistance.current);
+    if (listHeight - spreadDistance.current) {
+      listRef.current.style.cssText = `height:${spreadDistance.current}px;overflow:hidden`;
+      spreadToggleRef.current.style.display = "block";
+      spreadToggleRef.current.textContent = "展开";
+    } else {
+      spreadToggleRef.current.style.display = "none";
     }
-  },[]);
+  });
 
   function handleClickSpread() {
     if (listRawHeight.current <= spreadDistance.current) return;
-    console.log("ddd");
-    if (spreadText === "展开") {
-      setSpreadText("收起");
-      setListStyle({
-        height: listRawHeight.current + "px",
-        overflow: "none",
-      });
+    if (getSpreadText() === "展开") {
+      listRef.current.style.cssText = `height:${listRawHeight.current}px;overflow:none`;
+      spreadToggleRef.current.textContent = "收起";
     } else {
-      setSpreadText("展开");
-      setListStyle({
-        height: spreadDistance.current + "px",
-        overflow: "none",
-      });
+      listRef.current.style.cssText = `height:${spreadDistance.current}px;overflow:hidden`;
+      spreadToggleRef.current.textContent = "展开";
     }
   }
   function handleItemClick(value) {
     // 调用父组件传递的方法并传入数据
     handleSearch && handleSearch(value);
+   
   }
 
-  function handleLongPress() {
-    console.log(handleLongPress);
-  }
+  function handleLongPress() {}
   async function handleDeleteClick() {
     // 等待用户点击拿到返回值
     const res = await showAlert();
@@ -75,13 +69,15 @@ function SearchHistoryList({
     <div className="p-1">
       <div className="flex justify-between w-100">
         <p className="font-bold">搜索历史</p>
-        {isShowSpreadWidget && (
-          <p onClick={handleClickSpread} className="text-gray-400 text-ssm">
-            {spreadText}
-          </p>
-        )}
+        <p
+          ref={spreadToggleRef}
+          onClick={handleClickSpread}
+          className="text-gray-400 text-ssm"
+        >
+          展开
+        </p>
       </div>
-      <div className="mt-1 flex flex-wrap" ref={listRef} style={listStyle}>
+      <div className="mt-1 flex flex-wrap" ref={listRef}>
         {list.map((v, i) => {
           return (
             <div

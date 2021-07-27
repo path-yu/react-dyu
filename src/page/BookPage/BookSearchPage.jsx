@@ -9,7 +9,7 @@ import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 function BookSearchPage(props) {
   const ref = useRef(null);
-  const BookNavBarRef = useRef(null)
+  const BookNavBarRef = useRef(null);
   const history = useHistory();
   const [isShowSearchHistory, setIsShowSearchHistory] = useState(true);
   const [isShowBookList, setIsShowBookList] = useState(false);
@@ -22,18 +22,17 @@ function BookSearchPage(props) {
       Toast.fail("请不要输入空值", 200);
       return;
     }
-    
+
     setIsShowBookList(true);
     setIsShowSearchHistory(false);
-    addSearchHistory(val);
-
-     ref.current !== null && ref.current[1].getBookListData(val);
+    ref.current !== null && ref.current[1].getBookListData(val);
+    return addSearchHistory(val);
   }
   function handleOnBackTap() {
     if (isShowSearchHistory && !isShowBookList) {
       return history.goBack();
     }
-    BookNavBarRef.current.changeValue('');
+    BookNavBarRef.current.changeValue("");
     if (isShowBookList) {
       setIsShowBookList(false);
       setIsShowSearchHistory(true);

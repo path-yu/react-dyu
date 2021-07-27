@@ -1,3 +1,4 @@
+import { appBarIconStyle } from "@/common/material-icon-style";
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
@@ -6,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import { ArrowBack, Home } from "@material-ui/icons";
 import React from "react";
 import { useHistory } from "react-router-dom";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: 'ellipsis',
   },
   offside: {
-    fontSize: "18px",
+    fontSize: "0.5rem",
     marginLeft:'10px'
   },
 }));
@@ -37,13 +37,14 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar(props) {
   const { title = "团宠大佬：妈咪，你马甲掉了43443" } = props;  
   const classes = useStyles();
+  const IconStyle = appBarIconStyle();
   const {goBack,push} = useHistory();  
   return (
     <div
       className={classes.root}
       style={{ background: "linear-gradient(to right, #4fba46, #82c542)" }}
     >
-      <AppBar position="sticky" color='transparent'>
+      <AppBar position="sticky" color="transparent">
         <Toolbar className={classes.Toolbar}>
           <IconButton
             edge="start"
@@ -52,7 +53,7 @@ export default function ButtonAppBar(props) {
             onClick={goBack}
             className={classes.menu}
           >
-            <ArrowBack />
+            <ArrowBack className={IconStyle.root} />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             <span className="no-wrap">{title}</span>
@@ -65,7 +66,7 @@ export default function ButtonAppBar(props) {
             onClick={() => push("/")}
             aria-label="menu"
           >
-            <Home />
+            <Home className={IconStyle.root} />
           </IconButton>
         </Toolbar>
       </AppBar>
