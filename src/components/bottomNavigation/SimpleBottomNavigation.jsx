@@ -1,7 +1,7 @@
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { forwardRef, useImperativeHandle } from "react";
+import React, { forwardRef, useImperativeHandle, useState } from "react";
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -14,8 +14,8 @@ const useStyles = makeStyles({
 function SimpleBottomNavigation(props,ref) {
   const classes = useStyles();
   const { onPress, tabBarList,hidden } = props;
-  const [value, setValue] = React.useState(0);
-
+  const [value, setValue] = useState(0);
+  console.log(value);
   function renderBottomNavigationAction(){
       return tabBarList && tabBarList.map((item) => {
           return (
@@ -29,6 +29,7 @@ function SimpleBottomNavigation(props,ref) {
   }
   function changeValue(index) {
     setValue(index);
+    console.log(index);
   }
   useImperativeHandle(ref,()=>{
     return {

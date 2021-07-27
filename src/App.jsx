@@ -41,7 +41,7 @@ function App() {
   useEffect(() => {
     let index = computedLocationIndex(location);
     // 初始化设置底部导航栏的索引
-    if (index) {
+    if (index !== -1) {
       ref.current && ref.current.changeValue(index);
     }
    const unListen =  history.listen((location, action) => {
