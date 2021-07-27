@@ -1,8 +1,7 @@
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import { makeStyles } from "@material-ui/core/styles";
-import PropTypes from 'prop-types';
-import React from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -12,10 +11,10 @@ const useStyles = makeStyles({
  
 });
 
-export default function SimpleBottomNavigation(props) {
+function SimpleBottomNavigation(props,ref) {
   const classes = useStyles();
-  const { onPress, tabBarList,current,hidden } = props;
-  const [value, setValue] = React.useState(current);
+  const { onPress, tabBarList,hidden } = props;
+  const [value, setValue] = React.useState(0);
 
   function renderBottomNavigationAction(){
       return tabBarList && tabBarList.map((item) => {
@@ -28,13 +27,21 @@ export default function SimpleBottomNavigation(props) {
           );
       })
   }
+  function changeValue(index) {
+    setValue(index);
+  }
+  useImperativeHandle(ref,()=>{
+    return {
+      changeValue,
+    };
+  })
   return (
     <BottomNavigation
       value={value}
       style={{ display: hidden ? "flex" : "none" }}
       onChange={(event, newValue) => {
-        setValue(newValue);
         onPress && onPress(newValue);
+        setValue(newValue);
       }}
       showLabels
       className={classes.root}
@@ -43,7 +50,6 @@ export default function SimpleBottomNavigation(props) {
     </BottomNavigation>
   );
 }
-SimpleBottomNavigation.propTypes = {
-  onPress: PropTypes.func,
-  tabBarList: PropTypes.array,
-};
+
+
+export default forwardRef(SimpleBottomNavigation);

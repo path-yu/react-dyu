@@ -4,7 +4,7 @@ import {
   HomeSharp,
   MenuBookSharp
 } from "@material-ui/icons";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Switch, useHistory } from "react-router-dom";
 import "./App.css";
 import Layout from "./components/Layout";
@@ -31,41 +31,45 @@ function App() {
     },
   ];
   const history = useHistory();
-  const current = useRef(0);
+  const ref = useRef(null);
   const [hidden, setHidden] = useState(true);
 
-  const currentUrl = useMemo(
-    () => tabBarDataList[current.current].url,
-    [current]
-  );
 
+  function computedLocationIndex(location) {
+    return tabBarDataList.findIndex((item) => item.url === location.pathname);
+  }
   useEffect(() => {
+    let index = computedLocationIndex(location);
+    // 初始化设置底部导航栏的索引
+    if (index) {
+      ref.current && ref.current.changeValue(index);
+    }
     history.listen((location, action) => {
-     if (location.isOpenNewPage){
-       setHidden(false);
-     }else{
-       setHidden(true)
-     }
-       switch (location.pathname) {
-         case "/":
-           document.title = "首页";
-           break;
-         case "/book":
-           document.title = "图书馆";
-           break;
-         case "/user":
-           document.title = "个人中心";
-           break;
-         default:
-           document.title = "欢迎来到react项目";
-       }
+      if (location.isOpenNewPage) {
+        setHidden(false);
+      } else {
+        setHidden(true);
+      }
+      switch (location.pathname) {
+        case "/":
+          document.title = "首页";
+          break;
+        case "/book":
+          document.title = "图书馆";
+          break;
+        case "/user":
+          document.title = "个人中心";
+          break;
+        default:
+          document.title = "欢迎来到react项目";
+      }
     });
-  },[]);
+  }, []);
 
   function handleOnPress(index) {
     history.push(tabBarDataList[index].url);
   }
-  
+
   return (
     <Layout className="App">
       <Switch>
@@ -74,8 +78,8 @@ function App() {
       <SimpleBottomNavigation
         tabBarList={tabBarDataList}
         onPress={handleOnPress}
-        current={current.current}
         hidden={hidden}
+        ref={ref}
       ></SimpleBottomNavigation>
     </Layout>
   );
