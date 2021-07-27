@@ -74,5 +74,6 @@ export function randomBarrage(count){
     return indexList.reduce((t,v) => {
         t.push(danmu[v]);
         return t;
-    },[])
+    }, []).filter(item => item?.lv && item?.content && item?.nickName)
+    
 }

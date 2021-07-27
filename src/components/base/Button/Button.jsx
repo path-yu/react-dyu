@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomizedButtons(props) {
   const {
     text = "加入阅读",
-    handleClick,
+    onClick,
     backgroundColor = "rgb(130, 197, 66)",
   } = props;  
   const classes = useStyles();
@@ -59,8 +59,8 @@ export default function CustomizedButtons(props) {
       <BootstrapButton
         variant="contained"
         color="primary"
-        style={{background:backgroundColor}}
-        onClick={handleClick}
+        style={{ background: backgroundColor }}
+        onClick={onClick}
         className={classes.margin}
       >
         {text}

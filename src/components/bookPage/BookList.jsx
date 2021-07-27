@@ -43,7 +43,6 @@ function BookList(props, ref) {
     []
   );
   function getBookListData(keyword) {
-    console.log(keyword);
     return http("/book/searchByPage", {
       params: {
         catId: id,
@@ -118,7 +117,7 @@ function BookList(props, ref) {
                 <img src={item.picUrl} alt="" />
               </div>
               <div className="bookInfo">
-                <h5>{item.bookName}</h5>
+                <h5 className="truncate w-13">{item.bookName}</h5>
                 <p>作者:{item.authorName} </p>
                 <p>更新:{item.lastIndexUpdateTime} </p>
                 <p>类别:{item.catName} </p>

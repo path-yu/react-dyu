@@ -1,0 +1,53 @@
+.UserPage {
+    p {
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        background-color: #82c542;
+        color: white;
+        letter-spacing: 2px;
+        font-size: 16px;
+    }
+
+    .from {
+
+        height: 200px;
+        padding: 15px;
+    }
+
+    .from {
+        margin-left: 20px;
+
+        .am-button-primary {
+            margin-top: 10px;
+            background-color: #82c542;
+        }
+    }
+}
+
+.am-list-item .am-input-label.am-input-label-5 {
+    width: 25px;
+}
+
+.am-list-item.am-input-item {
+    margin-top: 10px;
+}
+
+.userHome {
+    text-align: center;
+    padding: 10px;
+
+    h1 {
+        font-size: 19px;
+    }
+
+    img {
+        width: 100px;
+        height: 100px;
+        margin-top: 10px;
+    }
+
+    a {
+        margin-top: 20px;
+    }
+}

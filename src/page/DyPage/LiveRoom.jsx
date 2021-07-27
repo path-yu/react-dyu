@@ -19,7 +19,7 @@ export default function LiveRoom(props) {
               });
               distance.current = distance.current + 60;
               scrollRef.current.scrollTo(0, distance.current);
-        },1500)
+        },1000)
         return () => {
             clearInterval(timer);
         }
@@ -42,10 +42,10 @@ export default function LiveRoom(props) {
               return (
                 <p key={i} className="dm-item">
                   <span>
-                    <i className={"level" + " level-" + v.lv}></i>
-                    {v.nickName}
+                    <i className={"level" + " level-" + v?.lv}></i>
+                    {v?.nickName}
                   </span>
-                  ：{v.content}
+                  ：{v?.content}
                 </p>
               );
             })}

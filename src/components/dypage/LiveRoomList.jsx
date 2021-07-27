@@ -72,9 +72,6 @@ function LiveRoomList(props, ref) {
   }
   function getNextLiveListData() {
     if (page.current > maxPage.current) return Promise.resolve(true);
-    if (page.current >= 3) {
-      return Promise.resolve(true);
-    }
     return http("/liveRoomList", {
       params: {
         type: type !== "tj" ? type : "",
