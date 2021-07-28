@@ -1,6 +1,4 @@
-var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
 const axios = require('axios');
 var cookieParser = require('cookie-parser');
 
@@ -10,8 +8,7 @@ const axiosInstance = axios.create({
 const requestBookInstance = axios.create({
   baseURL: ' http://47.106.243.172:8888'
 });
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+
 
 var app = express();
 app.all('*', function (req, res, next) {
@@ -27,10 +24,7 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-console.log(path.join(__dirname, 'public'));
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+
 
 app.get('/api/cateList', async (req, res, next) => {
   const response = await axiosInstance('/cate/recList?cid=&ct=');

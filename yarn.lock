@@ -1771,13 +1771,18 @@ rc-util@4.x, rc-util@^4.0.4, rc-util@^4.15.3, rc-util@^4.4.0:
 
 react-dom@^16.8.5:
   version "16.14.0"
-  resolved "https://registry.nlark.com/react-dom/download/react-dom-16.14.0.tgz?cache=0&sync_timestamp=1626797772349&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact-dom%2Fdownload%2Freact-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
+  resolved "https://registry.nlark.com/react-dom/download/react-dom-16.14.0.tgz?cache=0&sync_timestamp=1627403192526&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact-dom%2Fdownload%2Freact-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
   integrity sha1-etg47Cmnd/s8dcOhkPZhz5Kri4k=
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     scheduler "^0.19.1"
+
+react-fastclick-alt@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.nlark.com/react-fastclick-alt/download/react-fastclick-alt-2.0.1.tgz#36e0ff18876bae2ce34c8709d9982a67be025b4b"
+  integrity sha1-NuD/GIdrrizjTIcJ2ZgqZ74CW0s=
 
 react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
@@ -2124,7 +2129,7 @@ sass@^1.35.2:
 
 scheduler@^0.19.1:
   version "0.19.1"
-  resolved "https://registry.nlark.com/scheduler/download/scheduler-0.19.1.tgz?cache=0&sync_timestamp=1626798124074&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fscheduler%2Fdownload%2Fscheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
+  resolved "https://registry.nlark.com/scheduler/download/scheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
   integrity sha1-Tz4u0sGn1laB9MhU+oxaHMtA8ZY=
   dependencies:
     loose-envify "^1.1.0"

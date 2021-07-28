@@ -33,7 +33,7 @@ export default function UserPage() {
   const { showAlert } = useModal("取消登录", "你确定要取消登录吗");
   const [name, setName] = useState("pathyu");
   const [password, setPassword] = useState("123456");
-  const [refresh,setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   const classes = useStyle();
 
   async function handleExitLogin() {

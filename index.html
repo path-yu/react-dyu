@@ -5,16 +5,18 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
   <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-     <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
   <title>Vite App</title>
 </head>
 
 <body>
   <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.js"></script>
+
    <script>
-     if ('addEventListener' in document) {
+     if ('addEventListener' in document) { 
        document.addEventListener('DOMContentLoaded', function () {
-         FastClick.attach(document.body);
+         FastClick.attach(document.getElementById('root'));
        }, false);
      }
      if (!window.Promise) {
@@ -22,7 +24,6 @@
          '>' + '<' + '/' + 'script>');
      }
    </script>
-  <script type="module" src="/src/main.jsx"></script>
 </body>
 
 </html>

@@ -5,6 +5,7 @@ const manualChunksList = ['@better-scroll', '@material-ui', 'video-react', 'reac
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [reactRefresh()],
+  base:'/dyu/',
   resolve:{
     alias:{
       '@':path.resolve(__dirname,'./src'),
@@ -14,8 +15,8 @@ export default defineConfig({
     rollupOptions:{
       output:{
         manualChunks(id) {
-          // const res = manualChunksList.some(item => id.includes(item));
-          if (id.includes('node_modules')) {
+          const res = manualChunksList.some(item => id.includes(item));
+          if (res) {
             return id.toString().split('node_modules/')[1].split('/')[0].toString();
           }
          

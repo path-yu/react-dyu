@@ -24,6 +24,7 @@
     "postcss-pxtorem": "^6.0.0",
     "react": "^17.0.0",
     "react-dom": "^16.8.5",
+    "react-fastclick-alt": "^2.0.1",
     "react-keep-alive": "^2.5.2",
     "react-router-dom": "^5.2.0",
     "react-transition-group": "^4.4.2",
