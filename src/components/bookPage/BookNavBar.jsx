@@ -69,7 +69,7 @@ function BookNavBar(props,ref) {
               disabled={isNeedBack ? false : true}
               placeholder={placeHolder}
               onChange={handleChange}
-              style={{ outline: "none" }}
+              style={{ outline: "none" ,background:'white'}}
             />
           ) : (
             "搜索"
