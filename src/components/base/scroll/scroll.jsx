@@ -54,6 +54,8 @@ function Scroll(props) {
       ...options,
       ...BScrollOption,
       pullUpLoad,
+      click:true,
+      tap:true
     });
     scrollRef.current = scrollVal;
 

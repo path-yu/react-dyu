@@ -31,14 +31,13 @@ function SearchHistoryList({
     spreadDistance.current = (itemHeight  + remToPx(0.25) ) * 2 + 3;
     console.log(listHeight, spreadDistance);
     if (listHeight > spreadDistance.current) {
-      console.log(2);
       listRef.current.style.cssText = `height:${spreadDistance.current}px;overflow:hidden`;
       spreadToggleRef.current.style.display = "block";
       spreadToggleRef.current.textContent = "展开";
     } else {
       spreadToggleRef.current.style.display = "none";
     }
-  });
+  },[]);
 
   function handleClickSpread() {
     if (listRawHeight.current <= spreadDistance.current) return;
