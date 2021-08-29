@@ -24,10 +24,10 @@ export default function BookDetail(props) {
   }
   return (
     <div className="BookDetail bg-white" style={{ height: "100vh" }}>
-      <ButtonAppBar title={state?.bookName}></ButtonAppBar>
+      <ButtonAppBar title={state?.bookName}/>
       <div className=" p-2 overflow-scroll" style={{ height: "92vh" }}>
         <div className="flex">
-          <img className="w-14 h-20 rounded" src={state?.picUrl}></img>
+          <img className="w-14 h-20 rounded" src={state?.picUrl}/>
           <div className="flex flex-col ml-2 justify-between">
             <p className="font-bold">作者: {state?.authorName}</p>
             <p>类别: {state?.catName}</p>
@@ -41,23 +41,20 @@ export default function BookDetail(props) {
         </div>
         <div>
           <div className="flex justify-center mt-2">
-            <CustomizedButtons text="立即阅读"></CustomizedButtons>
-            <CustomizedButtons
-              backgroundColor="#FCD34D"
-              text="加入书架"
-            ></CustomizedButtons>
-            <CustomizedButtons text="我的书架"></CustomizedButtons>
+            <CustomizedButtons text="立即阅读"/>
+            <CustomizedButtons backgroundColor="#FCD34D" text="加入书架"/>
+            <CustomizedButtons text="我的书架"/>
           </div>
 
           <p className="text-md mt-2 mb-1">内容简介</p>
-          <ReadMore richText={state?.bookDesc}></ReadMore>
+          <ReadMore richText={state?.bookDesc}/>
         </div>
         <div className="mt-2">
           <div className="p-1 flex justify-between border-solid border-b border-gray-100">
             <div className="font-semibold text-cmd">最新</div>
             <div className="text-gray-400 truncate w-14 text-right">
               {state?.lastIndexName}
-              <ChevronRight className={IconStyle.root}></ChevronRight>
+              <ChevronRight className={IconStyle.root}/>
             </div>
           </div>
 
@@ -65,7 +62,7 @@ export default function BookDetail(props) {
             <div className="font-semibold text-cmd">目录</div>
             <div className="text-gray-400">
               共{bookIndexList.length}张章
-              <ChevronRight className={IconStyle.root}></ChevronRight>
+              <ChevronRight className={IconStyle.root}/>
             </div>
           </div>
         </div>

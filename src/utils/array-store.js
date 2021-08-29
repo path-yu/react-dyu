@@ -2,7 +2,6 @@
 import storage from 'good-storage';
 
 export function save(key,items) {
-    console.log(items);
     return storage.set(key,items);
 }
 

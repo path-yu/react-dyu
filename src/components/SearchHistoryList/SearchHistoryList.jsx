@@ -23,13 +23,13 @@ function SearchHistoryList({
   const getSpreadText = useCallback(() => {
     return spreadToggleRef.current.textContent
   }, [spreadToggleRef]);
+  
   useLayoutEffect(() => {
     if (!list.length || !listRef.current || !spreadToggleRef.current) return;
     const itemHeight = getDOMSize(".searchHistoryItem")[1];
     const listHeight = (listRawHeight.current = listRef.current.clientHeight);
     //可能会有3px的误差
     spreadDistance.current = (itemHeight  + remToPx(0.25) ) * 2 + 3;
-    console.log(listHeight, spreadDistance);
     if (listHeight > spreadDistance.current) {
       listRef.current.style.cssText = `height:${spreadDistance.current}px;overflow:hidden`;
       spreadToggleRef.current.style.display = "block";

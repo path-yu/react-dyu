@@ -4,5 +4,3 @@ export default function useToggleDisplay(bindingVal) {
         display: bindingVal ? 'block' : 'none',
     }
 }
-
-let a = () => (434);

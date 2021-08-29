@@ -1,4 +1,3 @@
-
 // rem等比适配配置文件
 // 基准大小
 const baseSize = 37.5 

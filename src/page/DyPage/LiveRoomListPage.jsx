@@ -12,9 +12,7 @@ export default function LiveRoomListPage() {
   const getNextPageData = useCallback(() => {
     return liveRoomRef.current[shortName].getNextLiveListData;
   }, [liveRoomRef]);
-  useEffect(() => {
-    console.log(liveRoomRef.current);
-  });
+
 
   function computedHeight() {
     let appBarHeight = getDOMSize(".ButtonAppBar")[1];
@@ -23,15 +21,14 @@ export default function LiveRoomListPage() {
 
   return (
     <div>
-      <ButtonAppBar title={cate_name}></ButtonAppBar>
+      <ButtonAppBar title={cate_name}/>
       <Scroll
         pullUpLoad={true}
         getNextPageData={getNextPageData}
         CalcHeight={computedHeight}
       >
-        <LiveRoomList ref={liveRoomRef} type={shortName}></LiveRoomList>
+        <LiveRoomList ref={liveRoomRef} type={shortName}/>
       </Scroll>
-      <div>434343</div>
     </div>
   );
 }

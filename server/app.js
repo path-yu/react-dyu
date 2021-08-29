@@ -95,7 +95,6 @@ app.get('/api/book/searchByPage', async (req, res) => {
 });
 app.get('/api/queryNewIndexList', async (req, res) => {
   const {bookId} = req.query;
-  console.log(req.query);
   if(!bookId){
     res.json({data:null,message:'请输入id'})
   };

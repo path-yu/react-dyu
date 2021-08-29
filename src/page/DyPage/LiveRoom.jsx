@@ -11,6 +11,7 @@ export default function LiveRoom(props) {
     const [bulletList, setBulletList] = useState(randomBarrage(2));
     const scrollRef = useRef(null);
     const distance = useRef(50);
+
     useEffect(() => {
         const res = randomBarrage(2);
         let timer = setInterval(() => {
@@ -26,7 +27,7 @@ export default function LiveRoom(props) {
     })
     return (
       <div>
-        <ButtonAppBar title={roomName}></ButtonAppBar>
+        <ButtonAppBar title={roomName}/>
         <PlayerVideo
           playsInline
           poster="/assets/poster.png"
@@ -42,7 +43,7 @@ export default function LiveRoom(props) {
               return (
                 <p key={i} className="dm-item">
                   <span>
-                    <i className={"level" + " level-" + v?.lv}></i>
+                    <i className={'level' + ' level-' + v?.lv}/>
                     {v?.nickName}
                   </span>
                   ：{v?.content}

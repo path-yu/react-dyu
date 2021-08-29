@@ -5,7 +5,6 @@ export default function useLongPress(handLongPress, time = 1500) {
 
     function start() {
         setTimeOutEvent(setTimeout(() => {
-            console.log(timeOutEvent, longClick);
             setLongClick(1);
             // 此处为长按事件
             handLongPress && handLongPress();
@@ -20,7 +19,6 @@ export default function useLongPress(handLongPress, time = 1500) {
     }
 
     function end() {
-        console.log(timeOutEvent);
         clearTimeout(timeOutEvent);
         setLongClick(0) // 清除标志位
     }

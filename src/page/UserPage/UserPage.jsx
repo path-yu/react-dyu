@@ -50,27 +50,31 @@ export default function UserPage() {
       Toast.fail("用户名和账号不能为空");
       return;
     }
-    Toast.loading("正在登录中");
-    const response = await fetch("http://h5sm.com/uni/users/loginAndRegister", {
-      method: "POST",
-      mode: "cors",
-      body: "username=" + name + "&password=" + password,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-      },
-    });
-    const data = await response.json();
-    if (data.status === 1) {
-      Toast.hide();
-      Toast.success("登录成功");
-      localStorage.setItem("Dytoken", data.msg.token);
-      localStorage.setItem("DYusername", data.msg.username);
-      localStorage.setItem("DYavatar", data.msg.avatar);
-      setName("");
-      setPassword("");
-    } else {
-      Toast.fail(data.msg);
-    }
+    Toast.loading("正在登录中",);
+      try{
+        const response = await fetch("http://h5sm.com/uni/users/loginAndRegister", {
+          method: "POST",
+          mode: "cors",
+          body: "username=" + name + "&password=" + password,
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+          },
+        });
+        const data = await response.json();
+        if (data.status === 1) {
+          Toast.hide();
+          Toast.success("登录成功");
+          localStorage.setItem("Dytoken", data.msg.token);
+          localStorage.setItem("DYusername", data.msg.username);
+          localStorage.setItem("DYavatar", data.msg.avatar);
+          setName("");
+          setPassword("");
+        } else {
+          Toast.fail(data.msg);
+        }
+      }catch (error){
+        Toast.fail('登录失败')
+      }
   }
   if (!localStorage.getItem("Dytoken")) {
     return (
@@ -83,42 +87,41 @@ export default function UserPage() {
               value={name}
               className={classes.root}
               placeholder="请输入用户名"
-              InputLabelProps={{ shrink: true }}
+              InputLabelProps={{shrink: true}}
               onChange={(ev) => setName(ev.target.value)}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountCircle className={classes.icon}></AccountCircle>
-                  </InputAdornment>
+                    <InputAdornment position="start">
+                      <AccountCircle className={classes.icon}/>
+                    </InputAdornment>
                 ),
               }}
               label="用户名"
               variant="outlined"
-            ></TextField>
+            />
             <TextField
               value={password}
               className={classes.root}
               placeholder="请输入密码"
-              InputLabelProps={{ shrink: true }}
+              InputLabelProps={{shrink: true}}
               type="password"
               onChange={(ev) => setPassword(ev.target.value)}
               autoComplete="off"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
-                    <LockOpen className={classes.icon}></LockOpen>
-                  </InputAdornment>
+                    <InputAdornment position="start">
+                      <LockOpen className={classes.icon}/>
+                    </InputAdornment>
                 ),
               }}
               label="密码"
-              variant="outlined"
-            ></TextField>
+              variant="outlined"/>
           </form>
           <div className="flex justify-center">
             <CustomizedButtons
               onClick={handleClick}
               text="立即登录"
-            ></CustomizedButtons>
+            />
           </div>
         </div>
       </div>

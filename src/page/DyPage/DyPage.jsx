@@ -96,9 +96,9 @@ function DyTabs() {
       <ScrollableTabsButtonAuto
         renderTabsContent={renderItem}
         tabs={dyNavList}
-        keyName={"tag_name"}
+        keyName={'tag_name'}
         onChange={onChange}
-      ></ScrollableTabsButtonAuto>
+       />
     </div>
   );
 }

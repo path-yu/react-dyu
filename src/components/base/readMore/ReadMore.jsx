@@ -30,7 +30,8 @@ export default function ReadMore(props) {
     rotate === "0deg"
       ? "linear-gradient(-180deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 80%)"
       : "transparent";
-  const isShowToggle = richContentHeight.current >= maxHeight ? true : false;
+  const isShowToggle = richContentHeight.current >= maxHeight;
+
   useLayoutEffect(() => {
     const richContentOffsetHeight = (richContentHeight.current =
       richContainerRef.current.offsetHeight);

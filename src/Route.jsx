@@ -20,29 +20,29 @@ export default function Routes() {
       </Route>
       <Route path="/book" exact>
         <KeepAlive name="/book">
-          <BookPage></BookPage>
+          <BookPage/>
         </KeepAlive>
       </Route>
       <AnimatedSwitch>
-        <Route path="/bookDetail/:id" exact component={BookDetail}></Route>
+        <Route path="/bookDetail/:id" exact component={BookDetail}/>
       </AnimatedSwitch>
       <AnimatedSwitch>
         <Route
-          path="/bookSearch"
-          exact
-          render={() => <BookSearchPage appState={appState} />}
-        ></Route>
+        path="/bookSearch"
+        exact
+        render={() => <BookSearchPage appState={appState}/>}
+        />
       </AnimatedSwitch>
       <Route path="/user" exact>
         <KeepAlive name="/user">
-          <UserPage></UserPage>
+          <UserPage/>
         </KeepAlive>
       </Route>
       <Route path="/liveRoomList" exact>
-        <LiveRoomListPage></LiveRoomListPage>
+        <LiveRoomListPage/>
       </Route>
       <Route path="/liveRoom" exact>
-        <LiveRoom></LiveRoom>
+        <LiveRoom/>
       </Route>
     </>
   );

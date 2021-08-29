@@ -15,7 +15,6 @@ function DyTabs() {
   const type = useRef("tj");
   
   const requestData = useCallback(() => {
-    console.log(ref.current[type.current]);
     return ref.current[type.current].getLiveListData;
   }, [ref]);
   
@@ -30,7 +29,6 @@ function DyTabs() {
   }, [ref]);
   useEffect(() => {
     return () => {
-      console.log('dist');
     }
   })
   function getNavListData() {
@@ -39,7 +37,6 @@ function DyTabs() {
     });
   }
   function onChange(newVal) {
-    console.log(dyNavList[newVal]);
     // type.current = dyNavList[newVal].shortName;
   }
   // 计算scroll 组件根wrapper的高度, 好达到滚动的高度

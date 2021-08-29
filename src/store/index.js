@@ -1,6 +1,7 @@
 import { clear, load, save } from '@/utils/array-store';
 import { SEARCH_KEY } from '@/utils/constance';
 import { action, observable } from 'mobx';
+
 const appState = observable({
     searchHistoryList: load(SEARCH_KEY)
 });

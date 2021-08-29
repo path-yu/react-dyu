@@ -76,14 +76,14 @@ function App() {
   return (
     <Layout className="App">
       <Switch>
-        <Routes></Routes>
+        <Routes/>
       </Switch>
       <SimpleBottomNavigation
         tabBarList={tabBarDataList}
         onPress={handleOnPress}
         hidden={hidden}
         ref={ref}
-      ></SimpleBottomNavigation>
+      />
     </Layout>
   );
 }

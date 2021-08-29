@@ -15,7 +15,6 @@ function SimpleBottomNavigation(props,ref) {
   const classes = useStyles();
   const { onPress, tabBarList,hidden } = props;
   const [value, setValue] = useState(0);
-  console.log(value);
   function renderBottomNavigationAction(){
       return tabBarList && tabBarList.map((item) => {
           return (
@@ -29,7 +28,6 @@ function SimpleBottomNavigation(props,ref) {
   }
   function changeValue(index) {
     setValue(index);
-    console.log(index);
   }
   useImperativeHandle(ref,()=>{
     return {

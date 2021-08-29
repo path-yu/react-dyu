@@ -13,9 +13,7 @@ function BookSearchPage(props) {
   const history = useHistory();
   const [isShowSearchHistory, setIsShowSearchHistory] = useState(true);
   const [isShowBookList, setIsShowBookList] = useState(false);
-  function handleChange(val) {
-    console.log(val);
-  }
+
   function handleSearch(val) {
     BookNavBarRef.current.changeValue(val);
     if (!val) {
@@ -43,19 +41,18 @@ function BookSearchPage(props) {
       <BookNavBar
         placeHolder="请输入书名,作者"
         isNeedBack={true}
-        onChange={handleChange}
         onSearch={handleSearch}
         onBack={handleOnBackTap}
         ref={BookNavBarRef}
       />
       {/* 搜索历史 */}
       <SearchHistoryList
-        handleSearch={handleSearch}
-        appState={appState}
-        isShowSearchHistory={isShowSearchHistory}
-      ></SearchHistoryList>
+      handleSearch={handleSearch}
+      appState={appState}
+      isShowSearchHistory={isShowSearchHistory}
+    />
       <Scroll>
-        <BookList isShowBookList={isShowBookList} ref={ref}></BookList>
+        <BookList isShowBookList={isShowBookList} ref={ref}/>
       </Scroll>
     </div>
   );

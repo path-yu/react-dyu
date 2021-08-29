@@ -37,9 +37,6 @@ function BookNavBar(props,ref) {
     onChange && onChange(e.target.value);
   }
   function search() {
-    if (!val) {
-      console.log("请不要输入空值");
-    }
     onSearch && onSearch(val);
   }
   function changeValue(value){
@@ -54,27 +51,27 @@ function BookNavBar(props,ref) {
     <div className="BookNavBar">
       {isNeedBack ? (
         <div className="searchBack" onClick={toBack}>
-          <ArrowBackIos className={classes.root}></ArrowBackIos>返回{" "}
+          <ArrowBackIos className={classes.root}/>返回{" "}
         </div>
       ) : (
         ""
       )}
-      <div className="bookSearch" onClick={toBookSearchPage}>
-        {isNeedBack ? "" : <Search className={classes.root}></Search>}
+      <div  onClick={toBookSearchPage}  className="bookSearch" >
+        {isNeedBack ? "" : <Search className={classes.root}/>}
         <span>
-          {placeHolder ? (
+        {placeHolder ? (
             <input
-              type="text"
-              value={val}
-              disabled={isNeedBack ? false : true}
-              placeholder={placeHolder}
-              onChange={handleChange}
-              style={{ outline: "none" ,background:'white'}}
+                type="text"
+                value={val}
+                disabled={!isNeedBack}
+                placeholder={placeHolder}
+                onChange={handleChange}
+                style={{ outline: "none" ,background:'white'}}
             />
-          ) : (
+        ) : (
             "搜索"
-          )}
-        </span>
+        )}
+      </span>
       </div>
       <div className="bookSearchBtn" onClick={search}>
         搜索

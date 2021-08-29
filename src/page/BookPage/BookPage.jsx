@@ -35,19 +35,19 @@ export default function BookPage() {
         pullUpLoad={true}
         getNextPageData={getNextPageData}
       >
-        <BookList ref={BookListRef} name={item.name} id={item.id}></BookList>;
+        <BookList ref={BookListRef} name={item.name} id={item.id}/>;
       </Scroll>
     );
   };
   return (
     <div>
-      <BookNavBar></BookNavBar>
+      <BookNavBar/>
       <ScrollableTabsButtonAuto
         renderTabsContent={renderItem}
         tabs={bookCateList.list}
-        keyName={"name"}
+        keyName={'name'}
         onChange={onChange}
-      ></ScrollableTabsButtonAuto>
+      />
     </div>
   );
 }
