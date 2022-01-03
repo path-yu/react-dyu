@@ -1,26 +1,26 @@
-import Scroll from "@/components/base/scroll/scroll";
-import DyBanner from "@/components/dypage/DyBanner/DyBanner";
-import DyCategory from "@/components/dypage/DyCategory";
-import LiveRoomList from "@/components/dypage/LiveRoomList";
-import ScrollableTabsButtonAuto from "@/components/ScrollableTabsButtonAuto/ScrollableTabsButtonAuto";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import http from "../../http";
-import { getDOMSize, getWindowSize } from "../../utils/index";
+import Scroll from '@/components/base/scroll/scroll';
+import DyBanner from '@/components/dypage/DyBanner/DyBanner';
+import DyCategory from '@/components/dypage/DyCategory';
+import LiveRoomList from '@/components/dypage/LiveRoomList';
+import ScrollableTabsButtonAuto from '@/components/ScrollableTabsButtonAuto/ScrollableTabsButtonAuto';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import http from '../../http';
+import { getDOMSize, getWindowSize } from '../../utils/index';
 const liveRoomRefMap = {};
 function DyTabs() {
   const [dyNavList, setDyNavList] = useState([
-    { tag_id: 999, tag_name: "推荐", cate_id: 998, shortName: "tj" },
+    { tag_id: 999, tag_name: '推荐', cate_id: 998, shortName: 'tj' },
   ]);
   const LiveRoomListRef = useRef();
   const cateGoryRef = useRef(null);
-  const type = useRef("tj");
+  const type = useRef('tj');
   const requestData = useCallback(() => {
     const liveRoomListRequestFn =
-      LiveRoomListRef.current[type.current].getLiveListData;;
-    if (cateGoryRef && type.current === 'tj'){
+      LiveRoomListRef.current[type.current].getLiveListData;
+    if (cateGoryRef && type.current === 'tj') {
       return [liveRoomListRequestFn, cateGoryRef.current.getCategoryData];
     }
-      return liveRoomListRequestFn;
+    return liveRoomListRequestFn;
   }, [LiveRoomListRef]);
 
   const getNextPageData = useCallback(() => {
@@ -29,15 +29,13 @@ function DyTabs() {
 
   useEffect(() => {
     if (dyNavList.length === 1) {
-        getNavListData();
+      getNavListData();
     }
-    return () => {
-    }
+    return () => {};
   });
-  
- 
+
   function getNavListData() {
-    http("/cateList").then((res) => {
+    http('/cateList').then((res) => {
       setDyNavList((state) => state.concat(res.data));
     });
   }
@@ -46,13 +44,13 @@ function DyTabs() {
   }
   // 计算scroll 组件根wrapper的高度, 好达到滚动的高度
   function computeRootHeight(calcHeight) {
-    const tabsHeight = getDOMSize(".tabsWrapper")[1];
+    const tabsHeight = getDOMSize('.tabsWrapper')[1];
     const res = getWindowSize()[1] - tabsHeight;
-    return res + "px";
+    return res + 'px';
   }
   const renderItem = (item, index) => {
     const Element =
-      item.tag_name === "推荐" ? (
+      item.tag_name === '推荐' ? (
         <div>
           {/* 轮播图 */}
           <DyBanner />
@@ -92,13 +90,13 @@ function DyTabs() {
   //   return dyNavList.map(renderItem);
   // }
   return (
-    <div className="HeaderTabsWrapper">
+    <div className='HeaderTabsWrapper'>
       <ScrollableTabsButtonAuto
         renderTabsContent={renderItem}
         tabs={dyNavList}
         keyName={'tag_name'}
         onChange={onChange}
-       />
+      />
     </div>
   );
 }

@@ -8,10 +8,12 @@
     transform: scale(.8);
     transform-origin: left top
 }
+
 .c-chat .dm-item span {
     font-size: 0.38888889rem;
     color: #999
 }
+
 .c-chat .dm-item {
     margin-bottom: 0.11111111rem;
     padding: 0 0.27777778rem;
@@ -22,6 +24,7 @@
     word-wrap: break-word;
     word-break: break-all
 }
+
 .c-chat .dm-item i.level.level-1 {
     background-image: url(https://shark2.douyucdn.cn/front-publish/m-douyu-v3-master/assets/images/LV1_c8203fd.png)
 }
